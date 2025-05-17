@@ -41,7 +41,7 @@ class PadiController extends Controller
             'gambar' => $gambarPath,
         ]);
 
-        return redirect()->route('admin.padi.index')->with('success', 'Data Padi berhasil ditambahkan!');
+        return redirect()->route('padi.index')->with('success', 'Data Padi berhasil ditambahkan!');
     }
 
     public function edit($id_padi)
@@ -85,7 +85,7 @@ class PadiController extends Controller
         'gambar' => $padi->gambar, // gunakan yang baru kalau ada, atau tetap yang lama
     ]);
 
-    return redirect()->route('admin.padi.index')->with('success', 'Data padi berhasil diperbarui');
+    return redirect()->route('padi.index')->with('success', 'Data padi berhasil diperbarui');
 }
 
 
@@ -99,7 +99,7 @@ public function destroy($id_padi)
 
     $padi->delete();
 
-    return redirect()->route('admin.padi.index')->with('success', 'Data Padi Berhasil Dihapus!');
+    return redirect()->route('padi.index')->with('success', 'Data Padi Berhasil Dihapus!');
 }
 
 
