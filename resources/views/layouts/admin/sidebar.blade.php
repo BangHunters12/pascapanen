@@ -36,11 +36,13 @@
                     <div class="collapse" id="petaniMenu">
                         <ul class="nav flex-column ms-3">
                             {{-- Uncomment jika Data Petani akan digunakan --}}
+                            {{-- 
                             <li class="sidebar-item">
-                                {{-- <a class="sidebar-link" href="{{ route('petani.index') }}">
+                                <a class="sidebar-link" href="{{ route('petani.index') }}">
                                     <i class="ti ti-users"></i> Data Petani
-                                </a> --}}
-                            </li> 
+                                </a>
+                            </li>
+                            --}}
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="{{ route('padi.index') }}">
                                     <i class="ti ti-leaf"></i> Jenis Padi
@@ -50,6 +52,18 @@
                     </div>
                 </li>
 
+                {{-- Menu lainnya --}}
+                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penjualan_padi') }}"><i class="ti ti-shopping-cart"></i> Penjualan Padi</a></li> --}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('produk.index') }}">
+                        <i class="ti ti-package"></i> Produk
+                    </a>
+                </li>
+                {{-- 
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penyewaan') }}"><i class="ti ti-tool"></i> Penyewaan</a></li>
+                --}}
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('berita.index') }}">
                         <i class="ti ti-news"></i> Berita

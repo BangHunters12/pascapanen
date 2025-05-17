@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\PengajuanPadiController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,6 +43,7 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     })->name('dashboard');  
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
+    Route::resource('produk', ProdukController::class)->names('produk');
     // Route::get('haha/dashboard', [AdminController::class, 'index'])->name('admin/dashboard');
     // Route lainnya tinggal tulis 'route-name' saja tanpa 'admin.' di awal
 });
