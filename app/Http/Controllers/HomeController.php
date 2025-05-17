@@ -10,13 +10,13 @@ class HomeController extends Controller
 {
     public function index()
 {
-    $berita = Berita::latest()->take(3)->get();
-    $padi = Padi::latest()->take(3)->get();
+    $berita = Berita::latest()->get();
+    $padi = Padi::latest()->get();
      // Ambil 3 berita terbaru
     return view('user.beranda', compact('berita', 'padi'));
 }
 
-public function show($id)
+public function detail($id)
 {
     $berita = Berita::findOrFail($id);
     return view('user.detailberita', compact('berita'));

@@ -46,7 +46,7 @@ class BeritaController extends Controller
             'gambar' => $gambar,
         ]);
     
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan');
     }
 
     /**
@@ -94,7 +94,7 @@ class BeritaController extends Controller
             'gambar' => $berita->gambar,
         ]);
     
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui!');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui!');
     }
 
     /**
@@ -110,6 +110,6 @@ class BeritaController extends Controller
 
     $berita->delete();
 
-    return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
+    return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
     }
 }
