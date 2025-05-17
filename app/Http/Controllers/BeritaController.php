@@ -110,6 +110,6 @@ class BeritaController extends Controller
 
     $berita->delete();
 
-    return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
+    return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
     }
 }
