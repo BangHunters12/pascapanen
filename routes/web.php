@@ -3,25 +3,37 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UseController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\PengajuanPadiController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
-
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
-// Route::get('/berita/{id}', [HomeController::class, 'show'])->name('berita.show');
+Route::get('/berita/{id}', [HomeController::class, 'detail'])->name( 'berita.detail');
 Route::get('/penjualan-padi', action: [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
 
+Route::get('/alat_bajak', function () {
+    return view('user.layanan.alatbajak');
+});
+
+Route::get('/alat_panen', function () {
+    return view('user.layanan.alatpanen');
+});
+
+Route::get('/tenagatanam', function () {
+    return view('user.layanan.tenagatanam');
+});
+
+Route::get('/petanibaru', function () {
+    return view('user.layanan.petanibaru');
+});
 
 Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
-        // Route::get('/berita/{id}', [HomeController::class, 'show'])->name('berita.show');
 
     // Route::get('dashboard', [UseController::class, 'index'])->name('dashboard');
     // Route::get('/', [HomeController::class, 'index'])->name('beranda');
-    // Route::get('/berita/{id}', [HomeController::class, 'show'])->name('berita.show');
 });
 
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {

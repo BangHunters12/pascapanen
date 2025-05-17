@@ -91,60 +91,99 @@
 
 <section id="berita" class="berita section bg-success bg-opacity-25 py-5">
   <div class="container" data-aos="fade-up" data-aos-delay="100">
-  <div class="container">
     <h2 class="text-center text-success fw-bold mb-2">BERITA PERTANIAN</h2>
     <p class="text-center text-warning mb-5 fs-5">
       Semua yang perlu kamu tahu tentang pertanian, ada di sini.
     </p>
 
-    <div class="row">
-      @foreach($berita as $item)
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-          <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}"  style="height: 200px; object-fit: cover; object-position: center;">
-          <div class="card-body text-center">
-            <p class="card-text">
-              {{ Str::limit($item->isi, 100) }}
-            </p>
-            <a href="{{ route('berita.show', $item->id_berita) }}" class="text-primary fw-semibold">Baca Selengkapnya !!</a>
-          </div>
+    <div class="d-flex align-items-center justify-content-center position-relative">
+      <button id="beritaCarousel-prev" class="btn btn-success me-3" type="button" data-bs-target="#beritaCarousel" data-bs-slide="prev">
+  &lt;
+</button>
+
+      <div id="beritaCarousel" class="carousel slide flex-grow-1" data-bs-ride="carousel" style="max-width: 1100px; margin: 0 auto;">
+  <div class="carousel-inner">
+    @foreach($berita->chunk(3) as $chunkIndex => $beritaChunk)
+      <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+        <div class="row gx-4">  <!-- gx-4 = horizontal gap antar kolom -->
+          @foreach($beritaChunk as $item)
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 shadow-sm" style="width: 100%; max-width: 350px; margin: 0 auto;">
+                <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}"  style="height: 200px; object-fit: cover; object-position: center;">
+                <div class="card-body text-center">
+                  <p class="card-text">
+                    {{ Str::limit($item->isi, 100) }}
+                  </p>
+                  <a href="{{ route('berita.detail', $item->id_berita) }}" class="text-primary fw-semibold">Baca Selengkapnya !!</a>
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
-      @endforeach
-    </div>
+    @endforeach
+  </div>
+</div>
+
+      <button id="beritaCarousel-next" class="btn btn-success ms-3" type="button" data-bs-target="#beritaCarousel" data-bs-slide="next">
+  &gt;
+</button>
+
   </div>
 </section>
 
-<section id="harga" class=" harga section py-5 bg-light" >
+<section id="harga" class="harga section py-5 bg-light">
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <h2 class="text-center text-success mb-2 fw-bold">HARGA PADI</h2>
     <p class="text-center text-warning mb-5 fs-5">
       Update harga padi setiap hari agar kamu nggak ketinggalan info pasar.
     </p>
 
-    <div class="row">
-      @foreach ($padi as $item)
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-          <img src="{{ asset('storage/' . $item->gambar) }}"
-               class="card-img-top"
-               alt="{{ $item->nama }}"
-               style="height: 200px; object-fit: cover;">
+    <div class="d-flex align-items-center justify-content-center position-relative">
+      <!-- Tombol kiri -->
+      <button class="btn btn-success me-3" type="button" data-bs-target="#hargaCarousel" data-bs-slide="prev" style="z-index: 10;">
+        &lt;
+      </button>
 
-          <div class="card-body text-center">
-            <h5 class="card-title text-dark fw-bold">{{ ucfirst($item->nama_padi) }}</h5>
-            <hr class="my-2">
-            <ul class="list-unstyled text-secondary small">
-              <li><strong>Warna:</strong> {{ $item->warna }}</li>
-              <li><strong>Tekstur:</strong> {{ $item->tekstur }}</li>
-              <li><strong>Bentuk:</strong> {{ $item->bentuk }}</li>
-              <li><strong>Harga/kg:</strong> <span class="text-success fw-semibold">Rp{{ number_format($item->harga, 0, ',', '.') }}</span></li>
-            </ul>
-          </div>
+      <div id="hargaCarousel" class="carousel slide flex-grow-1" data-bs-ride="carousel" data-bs-interval="5000" style="max-width: 1200px;">
+        <div class="carousel-inner">
+          @foreach($padi->chunk(3) as $chunkIndex => $padiChunk)
+            <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+              <div class="row">
+                @foreach($padiChunk as $item)
+                  <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                      <img src="{{ asset('storage/' . $item->gambar) }}"
+                           class="card-img-top"
+                           alt="{{ $item->nama }}"
+                           style="height: 200px; object-fit: cover;">
+                      <div class="card-body text-center">
+                        <h5 class="card-title text-dark fw-bold">{{ ucfirst($item->nama_padi) }}</h5>
+                        <hr class="my-2">
+                        <ul class="list-unstyled text-secondary small">
+                          <li><strong>Warna:</strong> {{ $item->warna }}</li>
+                          <li><strong>Tekstur:</strong> {{ $item->tekstur }}</li>
+                          <li><strong>Bentuk:</strong> {{ $item->bentuk }}</li>
+                          <li><strong>Harga/kg:</strong> 
+                            <span class="text-success fw-semibold">Rp{{ number_format($item->harga, 0, ',', '.') }}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
-      @endforeach
+
+      <!-- Tombol kanan -->
+      <button class="btn btn-success ms-3" type="button" data-bs-target="#hargaCarousel" data-bs-slide="next" style="z-index: 10;">
+        &gt;
+      </button>
     </div>
+
   </div>
 </section>
 
@@ -303,3 +342,29 @@
 </section>
 
 @endsection
+
+<style>
+  #beritaCarousel-prev,
+  #beritaCarousel-next {
+    position: absolute;
+    background-color: #198754;
+    border: none;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    top: 60%; /* posisinya sedikit di bawah tengah */
+    transform: translateY(-50%);
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  #beritaCarousel-prev {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+  }
+
+  #beritaCarousel-next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+  }
+</style>
