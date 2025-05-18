@@ -38,6 +38,11 @@
                                   <i class="ti ti-leaf"></i> Jenis Padi
                               </a>
                           </li>
+<<<<<<< HEAD
+                      </ul>
+                  </div>
+              </li>
+=======
                       </ul>```html
 <aside class="left-sidebar text-dark" id="sidebar">
   <div class="sidebar-header d-flex align-items-center justify-content-between p-3 mb-3">
@@ -125,9 +130,18 @@
                         </ul>
                     </div>
                 </li>
+>>>>>>> 0e88d7195457f7c44aa8c250a2f1afdd79a21157
 
                 {{-- Menu lainnya --}}
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penjualan_padi') }}"><i class="ti ti-shopping-cart"></i> Penjualan Padi</a></li> --}}
+<<<<<<< HEAD
+               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk.index') }}"><i class="ti ti-package"></i> Produk</a></li>
+                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penyewaan') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> --}} 
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
+=======
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('produk.index') }}">
                         <i class="ti ti-package"></i> Produk
@@ -147,6 +161,7 @@
                         <i class="ti ti-news"></i> Berita
                     </a>
                 </li>
+>>>>>>> 0e88d7195457f7c44aa8c250a2f1afdd79a21157
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
