@@ -71,11 +71,7 @@
         </a>
         <div class="collapse" id="petaniMenu">
           <ul class="nav flex-column ms-3">
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ route('petani.index') }}">
-                <i class="ti ti-users"></i> Data Petani
-              </a>
-            </li>
+           
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('padi.index') }}">
                 <i class="ti ti-leaf"></i> Jenis Padi
@@ -85,7 +81,7 @@
         </div>
       </li>
 
-      <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk') }}"><i class="ti ti-package"></i> Produk</a></li>
+      <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk.index') }}"><i class="ti ti-package"></i> Produk</a></li>
       <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
 
       <li class="nav-small-cap mt-2">
