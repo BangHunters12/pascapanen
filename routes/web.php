@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PadiController;
+
 use App\Http\Controllers\PengajuanPadiController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
