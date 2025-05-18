@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('produk', function (Blueprint $table) {
             $table->id('id_produk');
             $table->string('nama_produk');
-            $table->text('kategori');
+            $table->enum('kategori', ['beras', 'pupuk', 'obat']); // ubah enum kategori sesuai kebutuhan
             $table->decimal('harga', 10, 2);
             $table->integer('stok');
-            $table->integer('satuan');
+            $table->enum('satuan', ['kg', 'ltr', 'sak']); // ubah enum satuan sesuai kebutuhan
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

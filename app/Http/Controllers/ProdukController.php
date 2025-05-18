@@ -16,15 +16,16 @@ class ProdukController extends Controller
             $query->where('nama_produk', 'like', '%' . $request->search . '%');
         }
 
-        $produk = $query->latest()->paginate(10)->withQueryString(); // ✅ Punya method withQueryString()
-
+        $produk = $query->latest()->paginate(10)->withQueryString();
 
         return view('admin.produk.index', compact('produk'));
     }
 
     public function create()
     {
-        return view('admin.produk.create');
+        $kategoriList = ['beras', 'pupuk', 'obat'];
+        $satuanList = ['kg', 'liter', 'pak'];
+        return view('admin.produk.create', compact('kategoriList', 'satuanList'));
     }
 
     public function store(Request $request)
@@ -34,11 +35,11 @@ class ProdukController extends Controller
             'kategori' => 'required|in:beras,pupuk,obat',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
-            'satuan' => 'required|string|max:100',
+            'satuan' => 'required|in:kg,liter,pak',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $gambarPath = $request->file('gambar')->store('produk', 'public');
+        $gambarPath = $request->file('gambar')->store('gambar_produk', 'public');
 
         Produk::create([
             'nama_produk' => $request->nama_produk,
@@ -55,7 +56,9 @@ class ProdukController extends Controller
     public function edit($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('admin.produk.edit', compact('produk'));
+        $kategoriList = ['beras', 'pupuk', 'obat'];
+        $satuanList = ['kg', 'liter', 'pak'];
+        return view('admin.produk.edit', compact('produk', 'kategoriList', 'satuanList'));
     }
 
     public function update(Request $request, $id)
@@ -67,21 +70,18 @@ class ProdukController extends Controller
             'kategori' => 'required|in:beras,pupuk,obat',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
-            'satuan' => 'required|string|max:100',
+            'satuan' => 'required|in:kg,liter,pak',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->only(['nama_produk', 'kategori', 'harga', 'stok', 'satuan']);
 
-        // Jika ada gambar baru diupload
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
             if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
                 Storage::disk('public')->delete($produk->gambar);
             }
 
-            // Simpan gambar baru
-            $data['gambar'] = $request->file('gambar')->store('produk', 'public');
+            $data['gambar'] = $request->file('gambar')->store('gambar_produk', 'public');
         }
 
         $produk->update($data);
@@ -93,7 +93,6 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
 
-        // Hapus gambar dari storage
         if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
             Storage::disk('public')->delete($produk->gambar);
         }

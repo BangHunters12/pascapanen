@@ -10,11 +10,21 @@ class BeritaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $beritas = Berita::all();
-        return view('admin.berita.index', compact('beritas'));
+    public function index(Request $request)
+{
+    $query = Berita::query();
+
+    if ($request->has('search')) {
+        $search = $request->search;
+        $query->where('judul', 'like', "%{$search}%")
+              ->orWhere('isi', 'like', "%{$search}%");
     }
+
+    $beritas = $query->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('admin.berita.index', compact('beritas'));
+}
+
 
     /**
      * Show the form for creating a new resource.
