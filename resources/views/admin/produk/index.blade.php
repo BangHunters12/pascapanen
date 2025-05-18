@@ -21,6 +21,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Gambar</th>
                 <th>Nama Produk</th>
                 <th>Kategori</th>
                 <th>Harga</th>
@@ -32,6 +33,13 @@
         <tbody>
             @forelse ($produk as $item)
                 <tr>
+                    <td>
+                        @if ($item->gambar)
+                            <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->nama_produk }}" class="img-fluid" style="max-height: 80px;">
+                        @else
+                            <span class="text-muted">Tidak ada gambar</span>
+                        @endif
+                    </td>
                     <td>{{ $item->nama_produk }}</td>
                     <td>{{ $item->kategori }}</td>
                     <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
@@ -48,7 +56,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Tidak ada data produk.</td>
+                    <td colspan="7">Tidak ada data produk.</td>
                 </tr>
             @endforelse
         </tbody>
