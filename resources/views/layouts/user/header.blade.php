@@ -20,13 +20,13 @@
                 </li>
 
                 <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/alat_bajak') }}" class="nav-link active">Alat Bajak</a></li>
-                        <li><a href="{{ url('/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
-                        <li><a href="{{ url('/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
-                        <li><a href="{{ url('/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
-                    </ul>
-                </li>
+    <ul class="dropdown-menu">
+        <li><a href="{{ url('layanan/alat_bajak') }}" class="dropdown-item">Alat Bajak</a></li>
+        <li><a href="{{ url('layanan/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
+        <li><a href="{{ url('layanan/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
+        <li><a href="{{ url('layanan/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
+    </ul>
+</li>
 
                 <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul class="dropdown-menu">

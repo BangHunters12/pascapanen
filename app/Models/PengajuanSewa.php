@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Models;
-use App\Models\jenisSewa;
 use Illuminate\Database\Eloquent\Model;
 
 class PengajuanSewa extends Model
 {
     protected $table = 'pengajuan_sewa';
     protected $primaryKey = 'id_pengajuan';
+    public $incrementing = false;
     protected $fillable = [
-        'id_petani', 'id_sewa', 'tanggal_sewa', 'lama_sewa_hari', 'biaya_sewa', 'status', 'keterangan'
+        'id_pengajuan', 'id_petani', 'id_sewa', 'tanggal_sewa', 'lama_sewa_hari', 'biaya_sewa', 'status', 'keterangan'
     ];
 
     public function petani()
@@ -20,5 +20,22 @@ class PengajuanSewa extends Model
     public function jenisSewa()
     {
         return $this->belongsTo(JenisSewa::class, 'id_sewa');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $last = self::orderBy('id_pengajuan', 'desc')->first();
+            $number = 1;
+
+            if ($last) {
+                $lastNumber = (int) str_replace('SEWA-', '', $last->id_pengajuan);
+                $number = $lastNumber + 1;
+            }
+
+            $model->id_pengajuan = 'SEWA-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+        });
     }
 }
