@@ -13,9 +13,6 @@
                 </li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ route('dashboard') }}"><i
                             class="ti ti-layout-dashboard"></i> Dashboard</a></li>
-
-                <li class="nav-small-cap mt-2">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Manajemen</span>
                 </li>
 
