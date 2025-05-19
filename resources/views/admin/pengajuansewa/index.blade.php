@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container py-4">
-    <h2 class="mb-4">Daftar Pengajuan Padi</h2>
+    <h2 class="mb-4">Daftar Pengajuan Sewa</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -12,12 +12,11 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>ID</th></th>
                     <th>Nama Petani</th>
-                    <th>Nama Padi</th>
-                    <th>Jumlah Karung</th>
-                    <th>Perlu Mobil</th>
-                    <th>Tanggal Pengajuan</th>
+                    <th>Jenis Sewa</th>
+                    <th>Tanggal Sewa</th>
+                    <th>Lama Sewa (hari)</th>
                     <th>Status</th>
                     <th>Keterangan</th>
                     <th>Ubah Status</th>
@@ -27,11 +26,10 @@
                 @forelse ($pengajuanList as $pengajuan)
                     <tr>
                         <td>{{ $pengajuan->id_pengajuan }}</td>
-                        <td>{{ $pengajuan->petani->nama_lengkap }}</td>
-                        <td>{{ $pengajuan->padi->nama_padi }}</td>
-                        <td>{{ $pengajuan->jumlah_karung }}</td>
-                        <td>{{ $pengajuan->perlu_mobil ? 'Ya' : 'Tidak' }}</td>
-                        <td>{{ $pengajuan->tanggal_pengajuan }}</td>
+                        <td>{{ $pengajuan->petani->nama_lengkap }}</td> <!-- Pastikan relasi petani ada -->
+                        <td>{{ $pengajuan->jenisSewa->nama_sewa }}</td> <!-- Pastikan relasi jenisSewa ada -->
+                        <td>{{ \Carbon\Carbon::parse($pengajuan->tanggal_sewa)->format('d-m-Y') }}</td>
+                        <td>{{ $pengajuan->lama_sewa_hari }}</td>
                         <td>
                             <span class="badge bg-{{ 
                                 $pengajuan->status == 'menunggu persetujuan' ? 'secondary' : 
@@ -43,7 +41,7 @@
                         <td>{{ $pengajuan->keterangan ?? '-' }}</td>
                         <td>
                             @if ($pengajuan->status === 'menunggu persetujuan')
-                                <form action="{{ route('pengajuanpadi.updateStatus', $pengajuan->id_pengajuan) }}" method="POST">
+                                <form action="{{ route('pengajuansewa.updateStatus', $pengajuan->id_pengajuan) }}" method="POST">
                                     @csrf
                                     <div class="input-group">
                                         <select name="status" class="form-select form-select-sm" required>
@@ -61,11 +59,12 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="text-center">Belum ada pengajuan.</td>
+                        <td colspan="8" class="text-center">Belum ada pengajuan sewa.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 </div>
+
 @endsection

@@ -3,6 +3,7 @@
 
 <section id="penjualan" class="py-5 bg-white">
     <div class="container">
+
     <div class="container section-title" data-aos="fade-up" style="margin-top: 50px;">
     <h2 class="fw-bold">Penjualan Padi</h2>
     <p class="lead">Catat penjualan padi ke pembeli dengan sistem yang rapi.</p>
@@ -85,7 +86,7 @@
 
     <div class="mb-3">
         <label class="form-label">Tanggal Pengajuan</label>
-        <input type="date" name="tanggal_pengajuan" class="form-control" required>
+        <input type="date" name="tanggal_pengajuan" class="form-control" required value="{{ date('Y-m-d') }}">
     </div>
 
     <div class="mb-3">
@@ -101,5 +102,19 @@
     </div>
   </div>
 </div>
+
+@if (session('success'))
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+        <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session('success') }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+@endif
+
 
 @endsection
