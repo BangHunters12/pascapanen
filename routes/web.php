@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
-Route::get('/berita/{id}', [HomeController::class, 'detail'])->name( 'berita.detail');
+Route::get('/berita/{id}', [HomeController::class, 'detail'])->name('berita.detail');
 Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
 
 Route::get('/alat_bajak', function () {
@@ -35,8 +35,9 @@ Route::get('/petanibaru', function () {
 
 Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
     Route::post('/pengajuan-padi/store', [PengajuanPadiController::class, 'store'])->name('pengajuanpadi.store');
-    Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
-
+    Route::get('/tenagatanam', function () {
+    return view('user.layanan.tenagatanam');
+});
     // Route::get('dashboard', [UseController::class, 'index'])->name('dashboard');
     // Route::get('/', [HomeController::class, 'index'])->name('beranda');
 });
@@ -44,7 +45,7 @@ Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
-    })->name('dashboard');  
+    })->name('dashboard');
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
