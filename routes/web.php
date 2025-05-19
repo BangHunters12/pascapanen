@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\PetaniController;
+use App\Http\Controllers\ProduksiBerasController;
 use App\Http\Controllers\PengajuanPadiController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,8 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     Route::resource('petani', PetaniController::class)->names('petani');
     Route::get('/pengajuan', [PengajuanPadiController::class, 'index'])->name('pengajuanpadi.index');
     Route::post('/pengajuan/{id}/status', [PengajuanPadiController::class, 'updateStatus'])->name('pengajuanpadi.updateStatus');
+    Route::resource('produksi_beras', ProduksiBerasController::class)->names('produksi_beras');
+
     // Route::get('haha/dashboard', [AdminController::class, 'index'])->name('admin/dashboard');
     // Route lainnya tinggal tulis 'route-name' saja tanpa 'admin.' di awal
 });

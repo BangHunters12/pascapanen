@@ -4,24 +4,36 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\PetaniController;
+use App\Http\Controllers\Api\ProdukController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Auth
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/petani/login', [LoginController::class, 'login']);
 
+// Berita
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::get('/berita/{id}', [BeritaController::class, 'show']);
 
-
-Route::post('/petani/login', [LoginController::class, 'login']);
+// Route dengan middleware auth:sanctum
 Route::middleware('auth:sanctum')->group(function () {
+
+    // Petani
     Route::get('/petani/profile', [PetaniController::class, 'profile']);
     Route::put('/petani/update-profile', [PetaniController::class, 'updateProfile']);
+
+    // Produk
+    Route::prefix('produk')->group(function () {
+        Route::get('/', [ProdukController::class, 'index']);
+        Route::get('/{id}', [ProdukController::class, 'show']);
+        Route::post('/', [ProdukController::class, 'store']);
+        Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
+        Route::delete('/{id}', [ProdukController::class, 'destroy']);
+    });
 });
