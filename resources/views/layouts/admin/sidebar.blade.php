@@ -57,18 +57,21 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Distribusi</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengiriman') }}"><i class="ti ti-truck"></i> Pengiriman</a></li> --}}
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Laporan</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('laporan') }}"><i class="ti ti-report"></i> Laporan</a></li> --}}
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Pengaturan</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengaturan') }}"><i class="ti ti-settings"></i> Pengaturan</a></li> --}}
 
             </ul>

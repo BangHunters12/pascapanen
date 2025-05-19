@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -10,8 +11,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Petani extends Authenticatable
 {
-    use HasApiTokens,HasFactory, Notifiable;
-    protected $table = 'petani'; 
+    use HasApiTokens, HasFactory, Notifiable;
+    protected $table = 'petani';
     // protected $guard = 'petani';
     protected $primaryKey = 'id_petani';
     protected $fillable = [
@@ -21,6 +22,7 @@ class Petani extends Authenticatable
         'email',
         'no_telp',
         'alamat',
+        'logo',
         'password',
         'role',
     ];

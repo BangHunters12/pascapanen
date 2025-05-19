@@ -5,6 +5,7 @@ use App\Http\Controllers\UseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\JenisSewaController;
 use App\Http\Controllers\PengajuanSewaController;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
-Route::get('/berita/{id}', [HomeController::class, 'detail'])->name( 'berita.detail');
+Route::get('/berita/{id}', [HomeController::class, 'detail'])->name('berita.detail');
 Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
 Route::get('/layanan/{jenis}', [PengajuanSewaController::class, 'formView'])->name('user.layanan.form');
 
@@ -30,10 +31,11 @@ Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
-    })->name('dashboard');  
+    })->name('dashboard');
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
+    Route::resource('petani', PetaniController::class)->names('petani');
     Route::get('/pengajuan', [PengajuanPadiController::class, 'index'])->name('pengajuanpadi.index');
     Route::post('/pengajuan/{id}/status', [PengajuanPadiController::class, 'updateStatus'])->name('pengajuanpadi.updateStatus');
     Route::resource('jenis-sewa', JenisSewaController::class)->names('jenis-sewa');
