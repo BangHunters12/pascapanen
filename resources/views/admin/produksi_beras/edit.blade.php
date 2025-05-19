@@ -1,4 +1,5 @@
-<div class="modal fade" id="modalEdit{{ $item->id_produksi }}" tabindex="-1" aria-labelledby="modalEditLabel{{ $item->id_produksi }}" aria-hidden="true">
+<div class="modal fade" id="modalEdit{{ $item->id_produksi }}" tabindex="-1"
+    aria-labelledby="modalEditLabel{{ $item->id_produksi }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('produksi_beras.update', $item->id_produksi) }}" method="POST">
@@ -13,7 +14,8 @@
                         <label class="form-label">Padi</label>
                         <select name="id_padi" class="form-control" required>
                             @foreach ($padi as $p)
-                                <option value="{{ $p->id_padi }}" {{ $item->id_padi == $p->id_padi ? 'selected' : '' }}>
+                                <option value="{{ $p->id_padi }}"
+                                    {{ $item->id_padi == $p->id_padi ? 'selected' : '' }}>
                                     {{ $p->nama_padi }}
                                 </option>
                             @endforeach
@@ -23,7 +25,8 @@
                         <label class="form-label">Produk</label>
                         <select name="id_produk" class="form-control" required>
                             @foreach ($produk as $p)
-                                <option value="{{ $p->id_produk }}" {{ $item->id_produk == $p->id_produk ? 'selected' : '' }}>
+                                <option value="{{ $p->id_produk }}"
+                                    {{ $item->id_produk == $p->id_produk ? 'selected' : '' }}>
                                     {{ $p->nama_produk }}
                                 </option>
                             @endforeach
@@ -31,15 +34,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tanggal Produksi</label>
-                        <input type="date" name="tanggal_produksi" class="form-control" value="{{ $item->tanggal_produksi }}" required>
+                        <input type="date" name="tanggal_produksi" class="form-control"
+                            value="{{ $item->tanggal_produksi }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jumlah Padi</label>
-                        <input type="number" name="jumlah_padi" class="form-control" value="{{ $item->jumlah_padi }}" required>
+                        <input type="number" name="jumlah_padi" class="form-control" value="{{ $item->jumlah_padi }}"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jumlah Beras</label>
-                        <input type="number" name="jumlah_beras" class="form-control" value="{{ $item->jumlah_beras }}" required>
+                        <input type="number" name="jumlah_beras" class="form-control"
+                            value="{{ $item->jumlah_beras }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>

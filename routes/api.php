@@ -28,7 +28,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/petani/profile', [PetaniController::class, 'profile']);
     Route::put('/petani/update-profile', [PetaniController::class, 'updateProfile']);
 
-    // Produk
+});
+
+ // Produk
     Route::prefix('produk')->group(function () {
         Route::get('/', [ProdukController::class, 'index']);
         Route::get('/{id}', [ProdukController::class, 'show']);
@@ -36,4 +38,3 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
         Route::delete('/{id}', [ProdukController::class, 'destroy']);
     });
-});
