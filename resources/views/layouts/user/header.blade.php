@@ -47,18 +47,18 @@
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#"
                     id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
 
-                    @if(Auth::user()->logo)
-                        <img src="{{ asset('storage/' . Auth::user()->logo) }}"
-                            alt="Profile" class="rounded-circle" width="32" height="32">
+                    @if (Auth::user()->logo)
+                        <img src="{{ asset('storage/' . Auth::user()->logo) }}" alt="Profile" class="rounded-circle"
+                            width="32" height="32">
                     @else
-                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}"
-                            alt="Profile Default" class="rounded-circle" width="32" height="32">
+                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="Profile Default"
+                            class="rounded-circle" width="32" height="32">
                     @endif
 
                     <span class="ms-2">{{ Auth::user()->nama_lengkap ?? Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="{{ route('profile.editProfil') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('profile.profil') }}">Profile</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
