@@ -2,59 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Models\Petani;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function showProfil()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return view('profile.profil');
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function editProfil()
     {
-        $request->user()->fill($request->validated());
+        return view('profile.edit-profil');
+    }
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    public function updateProfil(Request $request)
+    {
+        $user = Petani::find(Auth::id());
+
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:petani,username,' . $user->id_petani . ',id_petani',
+            'email' => 'required|email|max:255|unique:petani,email,' . $user->id_petani . ',id_petani',
+            'gender' => 'required|in:Laki-laki,Perempuan',
+            'no_telp' => 'required|max:20',
+            'alamat' => 'required',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $data = $request->only(['nama_lengkap', 'username', 'email', 'gender', 'no_telp', 'alamat']);
+
+        if ($request->hasFile('logo')) {
+            if ($user->logo) {
+                Storage::delete('public/' . $user->logo);
+            }
+            $data['logo'] = $request->file('logo')->store('logo_petani', 'public');
         }
 
-        $request->user()->save();
+        $user->update($data);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()->route('profile.profil')->with('success', 'Profil berhasil diperbarui.');
     }
 }
