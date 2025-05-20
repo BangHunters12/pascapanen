@@ -3,41 +3,75 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProduksiBeras;
+use App\Models\Produk;
 use App\Models\Padi;
 use Illuminate\Http\Request;
 
 class ProduksiBerasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produksi = ProduksiBeras::with('padi')->get(); // Hapus relasi 'produk'
+        $search = $request->search;
+
+        $produksi_beras = ProduksiBeras::with(['padi', 'produk'])
+            ->when($search, function ($query, $search) {
+                return $query->where('keterangan', 'like', "%{$search}%");
+            })
+            ->orderBy('tanggal_produksi', 'desc')
+            ->paginate(10);
+
         $padi = Padi::all();
-;
-        return view('admin.produksi_beras', compact('produksi', 'padi'));
+        $produk = Produk::all();
+
+        return view('admin.produksi_beras.index', compact('produksi_beras', 'padi', 'produk'));
     }
 
     public function store(Request $request)
     {
-        // Pastikan hanya field yang ada di fillable ProduksiBeras yang dikirim
-        ProduksiBeras::create($request->only([
-            'id_padi', 'tanggal_produksi', 'jumlah_padi', 'jumlah_beras', 'keterangan'
-        ]));
+        $request->validate([
+            'id_produk' => 'required',
+            'id_padi' => 'required',
+            'tanggal_produksi' => 'required|date',
+            'jumlah_padi' => 'required|integer',
+            'jumlah_beras' => 'required|integer',
+            'keterangan' => 'nullable|string'
+        ]); 
 
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        ProduksiBeras::create($request->all());
+
+        return redirect()->route('admin.produksi_beras.index')->with('success', 'Data berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $produksi_beras = ProduksiBeras::findOrFail($id);
+        $padi = Padi::all();
+        $produk = Produk::all();
+        return view('admin.produksi_beras.edit', compact('produksi_beras', 'padi', 'produk'));
     }
 
     public function update(Request $request, $id)
     {
-        ProduksiBeras::findOrFail($id)->update($request->only([
-            'id_padi', 'tanggal_produksi', 'jumlah_padi', 'jumlah_beras', 'keterangan'
-        ]));
+        $request->validate([
+            'id_produk' => 'required',
+            'id_padi' => 'required',
+            'tanggal_produksi' => 'required|date',
+            'jumlah_padi' => 'required|integer',
+            'jumlah_beras' => 'required|integer',
+            'keterangan' => 'nullable|string'
+        ]);
 
-        return redirect()->back()->with('success', 'Data berhasil diupdate');
+        $produksi_beras = ProduksiBeras::findOrFail($id);
+        $produksi_beras->update($request->all());
+
+        return redirect()->route('admin.produksi_beras.index')->with('success', 'Data berhasil diupdate.');
     }
 
     public function destroy($id)
     {
-        ProduksiBeras::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Data berhasil dihapus');
+        $produksi_beras = ProduksiBeras::findOrFail($id);
+        $produksi_beras->delete();
+
+        return back()->with('success', 'Data berhasil dihapus.');
     }
 }

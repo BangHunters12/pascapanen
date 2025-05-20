@@ -24,6 +24,7 @@ class Petani extends Authenticatable
         'email',
         'no_telp',
         'alamat',
+        'logo',
         'password',
         'role',
     ];

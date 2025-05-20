@@ -40,7 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'sanctum' => [
+            'driver' => 'sanctum',
+            'provider' => 'petani',
+        ],
     ],
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,18 +67,23 @@ return [
     */
 
     'providers' => [
-    'users' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Petani::class,
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petani::class,
+        ],
+
+        'petani' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petani::class,
+        ],
     ],
-],
 
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
+
 
     /*
     |--------------------------------------------------------------------------

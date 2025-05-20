@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
@@ -16,21 +18,28 @@ class ProdukController extends Controller
             $query->where('nama_produk', 'like', '%' . $request->search . '%');
         }
 
-        $produk = $query->latest()->paginate(10)->withQueryString();
+        $produk = $query->latest()->paginate(10);
 
-        return view('admin.produk.index', compact('produk'));
+        return response()->json([
+            'success' => true,
+            'data' => $produk
+        ]);
     }
 
-    public function create()
+    public function show($id)
     {
-        $kategoriList = ['beras', 'pupuk', 'obat'];
-        $satuanList = ['kg', 'liter', 'pak'];
-        return view('admin.produk.create', compact('kategoriList', 'satuanList'));
+        $produk = Produk::find($id);
+
+        if (!$produk) {
+            return response()->json(['success' => false, 'message' => 'Produk tidak ditemukan'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $produk]);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_produk' => 'required|string|max:255',
             'kategori' => 'required|in:beras,pupuk,obat',
             'harga' => 'required|numeric',
@@ -39,9 +48,13 @@ class ProdukController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+
         $gambarPath = $request->file('gambar')->store('gambar_produk', 'public');
 
-        Produk::create([
+        $produk = Produk::create([
             'nama_produk' => $request->nama_produk,
             'kategori' => $request->kategori,
             'harga' => $request->harga,
@@ -50,22 +63,18 @@ class ProdukController extends Controller
             'gambar' => $gambarPath,
         ]);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
-    }
-
-    public function edit($id)
-    {
-        $produk = Produk::findOrFail($id);
-        $kategoriList = ['beras', 'pupuk', 'obat'];
-        $satuanList = ['kg', 'liter', 'pak'];
-        return view('admin.produk.edit', compact('produk', 'kategoriList', 'satuanList'));
+        return response()->json(['success' => true, 'message' => 'Produk berhasil ditambahkan', 'data' => $produk]);
     }
 
     public function update(Request $request, $id)
     {
-        $produk = Produk::findOrFail($id);
+        $produk = Produk::find($id);
 
-        $request->validate([
+        if (!$produk) {
+            return response()->json(['success' => false, 'message' => 'Produk tidak ditemukan'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
             'nama_produk' => 'required|string|max:255',
             'kategori' => 'required|in:beras,pupuk,obat',
             'harga' => 'required|numeric',
@@ -74,24 +83,31 @@ class ProdukController extends Controller
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+
         $data = $request->only(['nama_produk', 'kategori', 'harga', 'stok', 'satuan']);
 
         if ($request->hasFile('gambar')) {
             if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
                 Storage::disk('public')->delete($produk->gambar);
             }
-
             $data['gambar'] = $request->file('gambar')->store('gambar_produk', 'public');
         }
 
         $produk->update($data);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate.');
+        return response()->json(['success' => true, 'message' => 'Produk berhasil diupdate', 'data' => $produk]);
     }
 
     public function destroy($id)
     {
-        $produk = Produk::findOrFail($id);
+        $produk = Produk::find($id);
+
+        if (!$produk) {
+            return response()->json(['success' => false, 'message' => 'Produk tidak ditemukan'], 404);
+        }
 
         if ($produk->gambar && Storage::disk('public')->exists($produk->gambar)) {
             Storage::disk('public')->delete($produk->gambar);
@@ -99,6 +115,6 @@ class ProdukController extends Controller
 
         $produk->delete();
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
+        return response()->json(['success' => true, 'message' => 'Produk berhasil dihapus']);
     }
 }
