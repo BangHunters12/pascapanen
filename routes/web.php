@@ -29,10 +29,12 @@ Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('
     // Route::get('/', [HomeController::class, 'index'])->name('beranda');
 });
 
+// --------------------[Belum Selesai]--------------------------------------
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [AdminController::class,'index']
+    )->name('dashboard');
+// -------------------------------------------------------------------------
+
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
