@@ -38,9 +38,10 @@ Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
 });
 
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');  
+
+    // [Dashboard percobaan]
+    Route::get('dashboard', [AdminController::class,'index'])->name('dashboard');
+
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');

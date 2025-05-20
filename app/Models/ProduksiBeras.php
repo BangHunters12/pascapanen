@@ -2,10 +2,12 @@
 namespace App\Models;
 use App\Models\Produk;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProduksiBeras extends Model
 {
+    use HasFactory;
     protected $table = 'produksi_beras';
     protected $primaryKey = 'id_produksi';
     protected $fillable = [
@@ -14,8 +16,8 @@ class ProduksiBeras extends Model
 
     public function padi()
     {
-        return $this->belongsTo(Padi::class, 'id_padi');
         $padi = Padi::whereIn('id', Produk::pluck('id_padi'))->get();
+        return $this->belongsTo(Padi::class, 'id_padi');
     }
 
     public function produk()
