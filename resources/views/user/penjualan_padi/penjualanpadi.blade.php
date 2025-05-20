@@ -7,9 +7,11 @@
                 <p class="lead">Catat penjualan padi ke pembeli dengan sistem yang rapi.</p>
             </div>
 
-            <div class="mb-4 text-center">
-        <img src="{{ asset('assets/images/logos/jualpadi.jpg') }}" alt="Alat Bajak" class="img-fluid rounded shadow-sm">
-    </div>
+            <!-- Gambar -->
+            <div class="text-center mb-3 mt-2">
+                <img src="{{ asset('assets/images/logos/jualpadi.jpg') }}" alt="Penjualan Padi" class="img-fluid rounded"
+                    style="max-height: 350px; object-fit: cover;">
+            </div>
 
             <!-- Deskripsi -->
             <div class="text-center mb-4">
@@ -32,7 +34,6 @@
                     <li>Potongan Biaya Tercatat Otomatis.</li>
                 </ol>
             </div>
-
             <!-- Tombol -->
             <div class="text-center mt-4">
                 @auth
@@ -50,76 +51,80 @@
         </div>
     </section>
 
-<!-- Modal Form Pengajuan -->
-<div class="modal fade" id="formPengajuanModal" tabindex="-1" aria-labelledby="formPengajuanLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="backdrop-filter: blur(10px);">
-      <div class="modal-header">
-        <h5 class="modal-title" id="formPengajuanLabel">Form Pengajuan Penjualan Padi</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('pengajuanpadi.store') }}" method="POST">
-    @csrf
+    @auth
+        <div class="modal fade" id="formPengajuanModal" tabindex="-1" aria-labelledby="formPengajuanLabel" aria-hidden="true"
+            data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content" style="backdrop-filter: blur(10px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="formPengajuanLabel">Form Pengajuan Penjualan Padi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('pengajuanpadi.store') }}" method="POST">
+                            @csrf
 
-    <div class="mb-3">
-        <label class="form-label">Nama Petani</label>
-        <input type="text" class="form-control" value="{{ Auth::user()->nama_lengkap }}" disabled>
-    </div>
+                            <!-- Nama Petani -->
+                            <div class="mb-3">
+                                <label class="form-label">Nama Petani</label>
+                                <input type="text" class="form-control" value="{{ Auth::user()->nama_lengkap }}" readonly>
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            </div>
+                            <!-- Pilih Padi -->
+                            <div class="mb-3">
+                                <label for="id_padi" class="form-label">Pilih Padi:</label>
+                                <select name="id_padi" class="form-select" required>
+                                    <option value="">-- Pilih Padi --</option>
+                                    @foreach ($padiList as $padi)
+                                        <option value="{{ $padi->id_padi }}"
+                                            {{ old('id_padi') == $padi->id_padi ? 'selected' : '' }}>
+                                            {{ $padi->nama_padi }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('id_padi')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-    <div class="mb-3">
-        <label for="id_padi" class="form-label">Pilih Padi:</label>
-        <select name="id_padi" class="form-select" required>
-            @foreach($padiList as $padi)
-                <option value="{{ $padi->id_padi }}">{{ $padi->nama_padi }}</option>
-            @endforeach
-        </select>
-    </div>
+                            <!-- Perlu Mobil -->
+                            <div class="mb-3">
+                                <label class="form-label">Perlu Mobil?</label>
+                                <select name="perlu_mobil" class="form-select" required>
+                                    <option value="">-- Pilih --</option>
+                                    <option value="1" {{ old('perlu_mobil') == '1' ? 'selected' : '' }}>Ya</option>
+                                    <option value="0" {{ old('perlu_mobil') == '0' ? 'selected' : '' }}>Tidak</option>
+                                </select>
+                            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Perlu Mobil?</label>
-        <select name="perlu_mobil" class="form-select" required>
-            <option value="1">Ya</option>
-            <option value="0">Tidak</option>
-        </select>
-    </div>
+                            <!-- Jumlah Karung -->
+                            <div class="mb-3">
+                                <label class="form-label">Jumlah Karung</label>
+                                <input type="number" name="jumlah_karung" class="form-control"
+                                    value="{{ old('jumlah_karung') }}" min="1" step="1" required>
+                            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Jumlah Karung</label>
-        <input type="number" name="jumlah_karung" class="form-control" required>
-    </div>
+                            <!-- Tanggal Pengajuan -->
+                            <div class="mb-3">
+                                <label class="form-label">Tanggal Pengajuan</label>
+                                <input type="date" name="tanggal_pengajuan" class="form-control"
+                                    value="{{ old('tanggal_pengajuan') }}" required>
+                            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Tanggal Pengajuan</label>
-        <input type="date" name="tanggal_pengajuan" class="form-control" required value="{{ date('Y-m-d') }}">
-    </div>
+                            <!-- Keterangan -->
+                            <div class="mb-3">
+                                <label class="form-label">Keterangan (Opsional)</label>
+                                <textarea name="keterangan" class="form-control">{{ old('keterangan') }}</textarea>
+                            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Keterangan (Opsional)</label>
-        <textarea name="keterangan" class="form-control"></textarea>
-    </div>
-
-    <div class="text-end">
-        <button type="submit" class="btn btn-success">Ajukan</button>
-    </div>
-</form>
-      </div>
-    </div>
-  </div>
-</div>
-
-@if (session('success'))
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-        <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    {{ session('success') }}
+                            <!-- Tombol Submit -->
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success">Ajukan</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
-    </div>
-@endif
-
-
+    @endauth
 @endsection
