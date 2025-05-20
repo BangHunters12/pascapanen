@@ -68,7 +68,7 @@
                 </ul>
             </div>
         @else
-            <a class="btn-getstarted" href="{{ url('/login') }}">Get Started</a>
+            <a class="btn-getstarted" href="{{ url('/register') }}">Get Started</a>
         @endif
 
     </div>
