@@ -10,7 +10,7 @@ class JenisSewaController extends Controller
     public function index()
     {
         $sewas = JenisSewa::paginate(10);
-        return view('admin.jenis_sewa.index', compact(var_name: 'sewas'));
+        return view('admin.jenis_sewa.index', compact('sewas'));
     }
 
     public function create()
@@ -21,10 +21,11 @@ class JenisSewaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_sewa' => 'required|string|max:255'
+            'nama_sewa' => 'required|string|max:255',
+            'harga_sewa' => 'required|numeric|min:0'
         ]);
 
-        JenisSewa::create($request->only('nama_sewa'));
+        JenisSewa::create($request->only(['nama_sewa', 'harga_sewa']));
 
         return redirect()->route('jenis-sewa.index')->with('success', 'Jenis sewa berhasil ditambahkan.');
     }
@@ -38,11 +39,12 @@ class JenisSewaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_sewa' => 'required|string|max:255'
+            'nama_sewa' => 'required|string|max:255',
+            'harga_sewa' => 'required|numeric|min:0'
         ]);
 
         $jenis = JenisSewa::findOrFail($id);
-        $jenis->update($request->only('nama_sewa'));
+        $jenis->update($request->only(['nama_sewa', 'harga_sewa']));
 
         return redirect()->route('jenis-sewa.index')->with('success', 'Jenis sewa berhasil diperbarui.');
     }
@@ -53,3 +55,4 @@ class JenisSewaController extends Controller
         return redirect()->route('jenis-sewa.index')->with('success', 'Jenis sewa berhasil dihapus.');
     }
 }
+
