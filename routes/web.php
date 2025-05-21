@@ -12,6 +12,8 @@ use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 
+
+
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/berita/{id}', [HomeController::class, 'detail'])->name( 'berita.detail');
 Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
@@ -47,6 +49,9 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
     Route::resource('produksi_beras', ProduksiBerasController::class)->names('produksi_beras');
+
+
+
 
     // Route::get('haha/dashboard', [AdminController::class, 'index'])->name('admin/dashboard');
     // Route lainnya tinggal tulis 'route-name' saja tanpa 'admin.' di awal

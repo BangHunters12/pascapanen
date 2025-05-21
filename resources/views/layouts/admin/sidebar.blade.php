@@ -38,130 +38,19 @@
                                   <i class="ti ti-leaf"></i> Jenis Padi
                               </a>
                           </li>
-<<<<<<< HEAD
                       </ul>
                   </div>
               </li>
-=======
-                      </ul>```html
-<aside class="left-sidebar text-dark" id="sidebar">
-  <div class="sidebar-header d-flex align-items-center justify-content-between p-3 mb-3">
-    <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
-      <img src="/assets/images/logos/dark-logo.svg" width="200" alt="Logo" />
-    </a>
-    <button class="btn btn-link sidebar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-      <i class="ti ti-menu"></i>
-    </button>
-  </div>
-  <nav class="sidebar-nav scroll-sidebar" data-simplebar>
-    <ul id="sidebarnav" class="nav flex-column">
-      <li class="nav-small-cap mt-2">
-        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-        <span class="hide-menu">Home</span>
-      </li>
-      <li class="sidebar-item"><a class="sidebar-link" href="{{ route('dashboard') }}"><i class="ti ti-layout-dashboard"></i> Dashboard</a></li>
-
-      <li class="nav-small-cap mt-2">
-        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-        <span class="hide-menu">Manajemen</span>
-      </li>
-
-      <!-- MENU PETANI DENGAN DROPDOWN JENIS PADI -->
-      <li class="sidebar-item">
-        <a class="sidebar-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#petaniMenu" role="button" aria-expanded="false">
-          <div>
-            <i class="ti ti-user"></i> Petani
-          </div>
-          <i class="ti ti-chevron-down"></i>
-        </a>
-        <div class="collapse" id="petaniMenu">
-          <ul class="nav flex-column ms-3">
-           
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ route('padi.index') }}">
-                <i class="ti ti-leaf"></i> Jenis Padi
-              </a>
-            </li>
-          </ul>
-        </div>
-
-      <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk.index') }}"><i class="ti ti-package"></i> Produk</a></li>
-      <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
-
-                <li class="nav-small-cap mt-2">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Home</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('dashboard') }}">
-                        <i class="ti ti-layout-dashboard"></i> Dashboard
-                    </a>
-                </li>
-
-                <li class="nav-small-cap mt-2">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Manajemen</span>
-                </li>
-
-                {{-- Dropdown Petani --}}
-                <li class="sidebar-item">
-                    <a class="sidebar-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-                        href="#petaniMenu" role="button" aria-expanded="false" aria-controls="petaniMenu">
-                        <div>
-                            <i class="ti ti-user"></i> Petani
-                        </div>
-                        <i class="ti ti-chevron-down"></i>
-                    </a>
-                    <div class="collapse" id="petaniMenu">
-                        <ul class="nav flex-column ms-3">
-                            {{-- Uncomment jika Data Petani akan digunakan --}}
-                            {{-- 
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="{{ route('petani.index') }}">
-                                    <i class="ti ti-users"></i> Data Petani
-                                </a>
-                            </li>
-                            --}}
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="{{ route('padi.index') }}">
-                                    <i class="ti ti-leaf"></i> Jenis Padi
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
->>>>>>> 0e88d7195457f7c44aa8c250a2f1afdd79a21157
 
                 {{-- Menu lainnya --}}
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penjualan_padi') }}"><i class="ti ti-shopping-cart"></i> Penjualan Padi</a></li> --}}
-<<<<<<< HEAD
                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk.index') }}"><i class="ti ti-package"></i> Produk</a></li>
-                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
-              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penyewaan') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> --}} 
-              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>
+               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras.index') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
+             
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuan_sewa.index') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> 
+               {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
+               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>--}} 
               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
-=======
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('produk.index') }}">
-                        <i class="ti ti-package"></i> Produk
-                    </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="{{ route('produksi_beras.index') }}">
-                    <i class="ti ti-building"></i> Produksi Beras</a></li>
-                    
-                    {{-- 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('penyewaan') }}"><i class="ti ti-tool"></i> Penyewaan</a></li>
-                --}}
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('berita.index') }}">
-                        <i class="ti ti-news"></i> Berita
-                    </a>
-                </li>
->>>>>>> 0e88d7195457f7c44aa8c250a2f1afdd79a21157
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
