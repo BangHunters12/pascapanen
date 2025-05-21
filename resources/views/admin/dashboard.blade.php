@@ -1,8 +1,11 @@
 @extends('layouts/admin.admin')
 
+
+
 @section('content')
     <div class="container-fluid mt-0 p-3">
-        <h2 class="fw-bold"><i class="bi bi-speedometer2"></i> Dashboard</h2>
+
+        <h2 class="fw-bold"></i> Dashboard</h2>
         <p class="text-muted">Ringkasan aktivitas pasca panen padi</p>
 
         <!-- Summary Cards -->
@@ -11,54 +14,39 @@
                 <div class="card shadow-sm p-3 text-center border-0 bg-success text-white">
                     <i class="bi bi-people fs-2 mb-2"></i>
                     <h5>Total Petani</h5>
-                    <p class="fs-3 fw-bold">5</p>
-                    <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                    <p class="fs-3 fw-bold" id="petaniTotal"><span>{{$petani['Total']}}</span></p>
+                    <span class="fs-6" id="petaniChanges">⬆ 12% dari bulan lalu</span>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-3">
-                <div class="card shadow-sm p-3 text-center border-0 bg-primary text-white">
+                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white">
                     <i class="bi bi-cart-check fs-2 mb-2"></i>
                     <h5>Total Penjualan Padi</h5>
-                    <p class="fs-3 fw-bold">Rp 6.035.000</p>
+                    <p class="fs-3 fw-bold">Rp <span>{{ $penjualan['Total'] }}</span></p>
                     <span class="fs-6">⬆ 8% dari bulan lalu</span>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-3">
-                <div class="card shadow-sm p-3 text-center border-0 bg-warning text-dark">
+                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white">
                     <i class="bi bi-box-seam fs-2 mb-2"></i>
                     <h5>Produksi Beras</h5>
-                    <p class="fs-3 fw-bold">4.760 kg</p>
+                    <p class="fs-3 fw-bold"><span>{{ $produksiBeras['TotalBerat'] }}</span> kg</p>
                     <span class="fs-6">⬆ 5% dari bulan lalu</span>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-3">
-                <div class="card shadow-sm p-3 text-center border-0 bg-danger text-white">
+                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white">
                     <i class="bi bi-currency-dollar fs-2 mb-2"></i>
                     <h5>Total Pendapatan</h5>
-                    <p class="fs-3 fw-bold">Rp 3.790.000</p>
+                    <p class="fs-3 fw-bold">Rp <span>{{ $pendapatan['Total'] }}</span></p>
                     <span class="fs-6">⬆ 10% dari bulan lalu</span>
                 </div>
             </div>
         </div>
 
-        <!-- Charts -->
-        <div class="row mt-3">
-            <div class="col-12 col-lg-6">
-                <div class="card shadow-sm p-3">
-                    <h5 class="text-center"><i class="bi bi-bar-chart-line"></i> Penjualan Padi (Bulanan)</h5>
-                    <canvas id="salesChart"></canvas>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="card shadow-sm p-3">
-                    <h5 class="text-center"><i class="bi bi-pie-chart"></i> Kategori Produk</h5>
-                    <canvas id="categoryChart"></canvas>
-                </div>
-            </div>
-        </div>
 
         <!-- Tables -->
-        <div class="row mt-3">
+        {{-- <div class="row mt-3">
             <div class="col-12 col-lg-6">
                 <div class="card shadow-sm p-3">
                     <h5 class="text-center"><i class="bi bi-clock-history"></i> Penjualan Terbaru</h5>
@@ -105,7 +93,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <!-- ChartJS Scripts -->
@@ -123,7 +111,9 @@
                     borderWidth: 2
                 }]
             },
-            options: { responsive: true }
+            options: {
+                responsive: true
+            }
         });
 
         const categoryChart = new Chart(document.getElementById('categoryChart'), {
@@ -141,3 +131,62 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 @endsection
+
+@push('animations')
+    <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
+    <script>
+        const {
+            animate,
+            utils,
+            createTimer,
+            createTimeline,
+        } = anime;
+
+        //[Element Card]
+        const $card = document.querySelectorAll('.card.shadow-sm.p-3.text-center.border-0');
+        const $cardData = document.querySelectorAll('.fs-3.fw-bold span');
+        const $petaniChanges = document.querySelector('#petaniChanges')
+        // console.log($petaniChanges.innerHTML)
+
+        //[Petani Calculation]
+        petaniCalucalation = {{$petani['LastMonth']}} === 0 ? 100 : (Math.round({{$petani['CurrentMonth']}}-{{$petani['LastMonth']}})/{{$petani['LastMonth']}}) * 100
+        $petaniChanges.innerHTML = `${petaniCalucalation} %`
+
+
+
+
+
+        //[Timeline Animation]
+        const timeL = createTimeline()
+        timeL.add($card, {
+            y: [{ to: '-2rem', ease: 'outCubic', duration: 400},
+                { to: 0, ease: 'outBack', duration: 400, delay: 50}],
+            delay: (_, i) => i * 100, // Function based value
+        },0)
+
+
+        $cardData.forEach(element => {
+            const endValues = parseInt(element.textContent.replace(/[^\d]/g, ''), 10);
+            element.innerHTML = "0";
+            let obj = {
+                endValue: 0
+            };
+
+            //[Second Animation From Timeline]
+            timeL.add(obj,
+                {
+                endValue: endValues,
+                duration: 1000,
+                delay: 500,
+                ease: 'inSine',
+                onUpdate: self => element.innerHTML = Math.round(obj.endValue).toLocaleString('id-ID'),
+                onComplete: self => console.log(obj.endValue)
+                },0
+            );
+
+        });
+    </script>
+@endpush
+@push('scripts')
+    <script></script>
+@endpush

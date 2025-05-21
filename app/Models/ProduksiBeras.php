@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Padi;
 use App\Models\Produk;
 
+
+
 class ProduksiBeras extends Model
 {
+    use HasFactory;
     protected $table = 'produksi_beras';
     protected $primaryKey = 'id_produksi';
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('jumlah_beras');
             $table->text('keterangan');
             $table->timestamps();
-        
+
             $table->foreign('id_padi')->references('id_padi')->on('padi');
             $table->foreign('id_produk')->references('id_produk')->on('produk');
         });

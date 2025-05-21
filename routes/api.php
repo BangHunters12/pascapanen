@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\BeritaController;
-use App\Http\Controllers\Api\PetaniController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProdukController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,14 +21,7 @@ Route::post('/petani/login', [LoginController::class, 'login']);
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::get('/berita/{id}', [BeritaController::class, 'show']);
 
-// Route dengan middleware auth:sanctum
-Route::middleware('auth:sanctum')->group(function () {
-
-    // Petani
-    Route::get('/petani/profile', [PetaniController::class, 'profile']);
-    Route::put('/petani/update-profile', [PetaniController::class, 'updateProfile']);
-
-});
+Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
 
  // Produk
     Route::prefix('produk')->group(function () {

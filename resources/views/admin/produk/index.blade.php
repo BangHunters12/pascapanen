@@ -61,7 +61,6 @@
             @endforelse
         </tbody>
     </table>
-
     {{ $produk->withQueryString()->links() }}
 </div>
 @endsection
