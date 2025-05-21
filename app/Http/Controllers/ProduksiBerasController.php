@@ -35,7 +35,7 @@ class ProduksiBerasController extends Controller
             'jumlah_padi' => 'required|integer',
             'jumlah_beras' => 'required|integer',
             'keterangan' => 'nullable|string'
-        ]);
+        ]); 
 
         ProduksiBeras::create($request->all());
 

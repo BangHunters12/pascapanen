@@ -1,4 +1,3 @@
-
 @extends('layouts.user.user')
 @section("content")
 
@@ -11,7 +10,7 @@
   </div>
 
     {{-- Navigasi Layanan (ul seperti filter isotope) --}}
-   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100" style="display: flex; gap: 10px; list-style: none; padding: 0; margin: 0;">
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_bajak']) }}" class="filter-btn {{ Request::is('layanan/alat_bajak') ? 'active' : '' }}">Alat Bajak</a></li>
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_panen']) }}" class="filter-btn {{ Request::is('layanan/alat_panen') ? 'active' : '' }}">Alat Panen</a></li>
@@ -20,18 +19,17 @@
     </ul>
 </div>
 
-
     {{-- Gambar --}}
     <div class="mb-4 text-center">
-        <img src="{{ asset('assets/images/logos/tenagatanam.jpg') }}" alt="Alat Bajak" class="img-fluid rounded shadow-sm">
+        <img src="{{ asset('assets/images/logos/alatpanen.jpg') }}" alt="Alat Bajak" class="img-fluid rounded shadow-sm">
     </div>
 
     {{-- Konten Layanan --}}
   <<<!-- Deskripsi -->
 <div class="text-center mb-4">
-    <h5 class="fw-semibold" style="font-size: 1.2rem;"> Layanan tenaga tanam</h5>
+    <h5 class="fw-semibold" style="font-size: 1.2rem;"> Layanan alat panen</h5>
     <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 0.95rem;">
-    sewa tenaga kerja berpengalaman untuk menanam padi
+        Gunakan alat panen yang mempercepat proses panen padi dan meminimalisir kerusakan hasil.
     </p>
 </div>
 
@@ -39,13 +37,13 @@
 <div class="mb-4">
     <h5 class="text-success fw-semibold text-center mb-3" style="font-size: 1.1rem;">Fasilitas</h5>
     <ol class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 0.95rem; line-height: 1.7;">
-        <li>Ibu- ibu petani lokal yang cekatan dan rapi</li>
-        <li>Sewa harian sesuai kebutuhan</li>
-        <li>Kordinasi mudan dan tranparan.</li>
+        <li>Tersedia mesin perontok</li>
+        <li>Rekomendasi untuk lahan luas dan sempit.</li>
+        <li>Disertai operator pengalaman.</li>
        
     </ol>
 </div>
-     {{-- Tombol Aksi --}}
+    {{-- Tombol Aksi --}}
      <div class="text-center mt-4" style="margin-bottom: 50px;">
     <a class="btn btn-lg px-4 text-white shadow-sm" style="background-color: #f5b93a; border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#formPengajuanModal">
         Ajukan Sewa

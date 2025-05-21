@@ -33,7 +33,6 @@ class PengajuanPadiController extends Controller
             'jumlah_karung' => $request->jumlah_karung,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'keterangan' => $request->keterangan,
-            // 'status' default 'menunggu persetujuan'
         ]);
 
         return redirect()->back()->with('success', 'Pengajuan berhasil diajukan.');

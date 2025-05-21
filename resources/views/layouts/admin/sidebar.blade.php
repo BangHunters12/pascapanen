@@ -47,7 +47,7 @@
                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produk.index') }}"><i class="ti ti-package"></i> Produk</a></li>
                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras.index') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
              
-              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuan_sewa.index') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> 
+              <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuansewa.index') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> 
                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>--}} 
               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
@@ -56,18 +56,21 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Distribusi</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengiriman') }}"><i class="ti ti-truck"></i> Pengiriman</a></li> --}}
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Laporan</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('laporan') }}"><i class="ti ti-report"></i> Laporan</a></li> --}}
 
                 <li class="nav-small-cap mt-2">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Pengaturan</span>
                 </li>
+
                 {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengaturan') }}"><i class="ti ti-settings"></i> Pengaturan</a></li> --}}
 
             </ul>

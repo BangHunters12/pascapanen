@@ -20,13 +20,13 @@
                 </li>
 
                 <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/alat_bajak') }}" class="nav-link active">Alat Bajak</a></li>
-                        <li><a href="{{ url('/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
-                        <li><a href="{{ url('/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
-                        <li><a href="{{ url('/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
-                    </ul>
-                </li>
+    <ul class="dropdown-menu">
+        <li><a href="{{ url('layanan/alat_bajak') }}" class="dropdown-item">Alat Bajak</a></li>
+        <li><a href="{{ url('layanan/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
+        <li><a href="{{ url('layanan/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
+        <li><a href="{{ url('layanan/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
+    </ul>
+</li>
 
                 <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
@@ -46,12 +46,22 @@
             <div class="dropdown">
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#"
                     id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ Auth::user()->profile_photo_url ?? asset('assets/images/logos/logoapk.png') }}"
-                        alt="Profile" class="rounded-circle" width="32" height="32">
-                    <span class="ms-2">{{ Auth::user()->name }}</span>
+
+                    @if (Auth::user()->logo)
+                        <img src="{{ asset('storage/' . Auth::user()->logo) }}" alt="Profile" class="rounded-circle"
+                            width="32" height="32">
+                    @else
+                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="Profile Default"
+                            class="rounded-circle" width="32" height="32">
+                    @endif
+
+                    <span class="ms-2">{{ Auth::user()->nama_lengkap ?? Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                    @if (Auth::user()->role === 'admin')
+                    <li> <a class="dropdown-item" href="{{route('dashboard')}}">Admin Page</a></li>
+                    @endif
+                    <li><a class="dropdown-item" href="{{ route('profile.editProfil') }}">Profile</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
