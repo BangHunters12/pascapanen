@@ -11,22 +11,22 @@
                 <li><a href="{{ url('/#about') }}" class="nav-link active">Tentang kami</a></li>
                 <li><a href="{{ route('user.penjualan_padi.penjualanpadi') }}" class="nav-link">Penjualan Padi</a></li>
 
-                <li class="dropdown"><a href="#"><span>Produk</span> <i class="bi bi-chevron-down"></i></a>
+                {{-- <li class="dropdown"><a href="#"><span>Produk</span> <i class="bi bi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pupuk</a></li>
-                        <li><a class="dropdown-item" href="#">Obat-obatan</a></li>
-                        <li><a class="dropdown-item" href="#">Beras</a></li>
+                        <li><a href="{{ route('user.produk.beras') }}" class="dropdown-item" >Beras</a></li>
+                        <li><a href="{{ route('user.produk.pupuk') }}" class="dropdown-item" >Pupuk</a></li>
+                        <li><a href="{{ route('user.produk.obat') }}" class="dropdown-item" >Obat-obatan</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/alat_bajak') }}" class="nav-link active">Alat Bajak</a></li>
-                        <li><a href="{{ url('/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
-                        <li><a href="{{ url('/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
-                        <li><a href="{{ url('/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
-                    </ul>
-                </li>
+    <ul class="dropdown-menu">
+        <li><a href="{{ url('layanan/alat_bajak') }}" class="dropdown-item">Alat Bajak</a></li>
+        <li><a href="{{ url('layanan/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
+        <li><a href="{{ url('layanan/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
+        <li><a href="{{ url('layanan/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
+    </ul>
+</li>
 
                 <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
@@ -46,13 +46,34 @@
             <div class="dropdown">
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#"
                     id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ Auth::user()->profile_photo_url ?? asset('assets/images/logos/logoapk.png') }}"
-                        alt="Profile" class="rounded-circle" width="32" height="32">
-                    <span class="ms-2">{{ Auth::user()->name }}</span>
+
+                    @if (Auth::user()->logo)
+                        <img src="{{ asset('storage/' . Auth::user()->logo) }}" alt="Profile" class="rounded-circle"
+                            width="32" height="32">
+                    @else
+                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="Profile Default"
+                            class="rounded-circle" width="32" height="32">
+                    @endif
+
+                    <span class="ms-2">{{ Auth::user()->nama_lengkap ?? Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    @if (Auth::user()->role === 'admin')
+                    <li> <a class="dropdown-item" href="{{route('dashboard')}}">Admin Page</a></li>
+                    @endif
                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
                     <li>
+                        <li>
+        <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ route('user.notifikasi') }}">
+            Notifikasi
+            @php
+                $unreadCount = Auth::user()->unreadNotifications->count();
+            @endphp
+            @if ($unreadCount > 0)
+                <span class="badge bg-danger rounded-pill ms-2">{{ $unreadCount }}</span>
+            @endif
+        </a>
+    </li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>

@@ -15,11 +15,12 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('no_telp');
             $table->text('alamat');
+            $table->string('logo')->nullable();
             $table->string('password');
             $table->timestamps();
             $table->enum('role', ['admin', 'petani'])->default('petani');
         });
-    }        
+    }
 
     public function down()
     {
