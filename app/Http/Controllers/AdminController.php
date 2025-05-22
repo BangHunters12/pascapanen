@@ -17,9 +17,8 @@ class AdminController extends Controller
         return view('admin.dashboard',[
             "petani" => ["Total" => Petani::count(),'CurrentMonth'=>Petani::currentMonth(),'LastMonth'=>Petani::lastMonth()],
             "penjualan"=> ["Total" => '-'],
-            "produksiBeras" => ["TotalBerat"=>ProduksiBeras::sum(column: 'jumlah_beras')],
+            "produksiBeras" => ["Total"=>ProduksiBeras::sum(column: 'jumlah_beras')],
             'pendapatan'=>["Total"=>'-']
-
         ]);
     }
 
