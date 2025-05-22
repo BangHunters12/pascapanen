@@ -21,13 +21,20 @@ Route::post('/petani/login', [LoginController::class, 'login']);
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::get('/berita/{id}', [BeritaController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
 
- // Produk
-    Route::prefix('produk')->group(function () {
-        Route::get('/', [ProdukController::class, 'index']);
-        Route::get('/{id}', [ProdukController::class, 'show']);
-        Route::post('/', [ProdukController::class, 'store']);
-        Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
-        Route::delete('/{id}', [ProdukController::class, 'destroy']);
-    });
+// Route::middleware('auth:sanctum')->put('/profil/update', [ProfileController::class, 'update']);
+// Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::post('/profile/update', [ProfileController::class, 'update']);
+});
+
+
+// Produk
+Route::prefix('produk')->group(function () {
+    Route::get('/', [ProdukController::class, 'index']);
+    Route::get('/{id}', [ProdukController::class, 'show']);
+    Route::post('/', [ProdukController::class, 'store']);
+    Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
+    Route::delete('/{id}', [ProdukController::class, 'destroy']);
+});
