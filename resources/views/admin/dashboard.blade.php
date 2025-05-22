@@ -96,40 +96,7 @@
         </div> --}}
     </div>
 
-    <!-- ChartJS Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const salesChart = new Chart(document.getElementById('salesChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei'],
-                datasets: [{
-                    label: 'Penjualan Padi',
-                    data: [1200000, 1800000, 1500000, 1450000, 0],
-                    backgroundColor: 'rgba(0, 128, 0, 0.7)',
-                    borderColor: 'green',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-
-        const categoryChart = new Chart(document.getElementById('categoryChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Pupuk', 'Pestisida', 'Benih'],
-                datasets: [{
-                    data: [40, 20, 40],
-                    backgroundColor: ['green', 'yellow', 'blue']
-                }]
-            }
-        });
-    </script>
-
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 @endsection
 
 @push('animations')
@@ -188,5 +155,5 @@
     </script>
 @endpush
 @push('scripts')
-    <script></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 @endpush

@@ -61,7 +61,7 @@
                     @if (Auth::user()->role === 'admin')
                     <li> <a class="dropdown-item" href="{{route('dashboard')}}">Admin Page</a></li>
                     @endif
-                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('profile.editProfil') }}">Profile</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
