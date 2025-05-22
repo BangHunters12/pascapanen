@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PengajuanSewa;
 
 class JenisSewa extends Model
 {
@@ -11,7 +12,7 @@ class JenisSewa extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'nama_sewa'
+        'nama_sewa', 'harga_sewa',
     ];
 
     public function pengajuanSewa()

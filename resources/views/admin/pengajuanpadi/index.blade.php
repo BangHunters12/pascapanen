@@ -12,7 +12,7 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Nama Petani</th>
                     <th>Nama Padi</th>
                     <th>Jumlah Karung</th>
@@ -26,7 +26,7 @@
             <tbody>
                 @forelse ($pengajuanList as $pengajuan)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pengajuan->id_pengajuan }}</td>
                         <td>{{ $pengajuan->petani->nama_lengkap }}</td>
                         <td>{{ $pengajuan->padi->nama_padi }}</td>
                         <td>{{ $pengajuan->jumlah_karung }}</td>

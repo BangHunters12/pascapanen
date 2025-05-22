@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jenis_sewa', function (Blueprint $table) {
             $table->id('id_sewa');
             $table->string('nama_sewa');
+            $table->integer('harga_sewa');
             $table->timestamps();
         });
     }

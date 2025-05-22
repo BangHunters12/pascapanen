@@ -11,8 +11,10 @@ class PengajuanPadi extends Model
 
     protected $table = 'pengajuan_padi';
     protected $primaryKey = 'id_pengajuan';
+    public $incrementing = false;
 
     protected $fillable = [
+        'id_pengajuan',
         'id_petani',
         'id_padi',
         'perlu_mobil',
@@ -32,5 +34,22 @@ class PengajuanPadi extends Model
     public function padi()
     {
         return $this->belongsTo(Padi::class, 'id_padi', 'id_padi');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $last = self::orderBy('id_pengajuan', 'desc')->first();
+            $number = 1;
+
+            if ($last) {
+                $lastNumber = (int) str_replace('PADI-', '', $last->id_pengajuan);
+                $number = $lastNumber + 1;
+            }
+
+            $model->id_pengajuan = 'PADI-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+        });
     }
 }

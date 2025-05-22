@@ -6,6 +6,7 @@ use App\Models\Padi;
 use Illuminate\Http\Request;
 use App\Models\PengajuanPadi;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\PengajuanPadiStatusNotification;
 
 class PengajuanPadiController extends Controller
 {
@@ -33,7 +34,6 @@ class PengajuanPadiController extends Controller
             'jumlah_karung' => $request->jumlah_karung,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'keterangan' => $request->keterangan,
-            // 'status' default 'menunggu persetujuan'
         ]);
 
         return redirect()->back()->with('success', 'Pengajuan berhasil diajukan.');
@@ -55,6 +55,8 @@ class PengajuanPadiController extends Controller
 
         $pengajuan = PengajuanPadi::findOrFail($id);
         $pengajuan->update(['status' => $request->status]);
+
+        $pengajuan->petani->notify(new PengajuanPadiStatusNotification($request->status));
 
         return back()->with('success', 'Status berhasil diperbarui.');
     }
