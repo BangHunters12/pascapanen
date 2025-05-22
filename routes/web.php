@@ -56,6 +56,10 @@ Route::middleware('auth')->group(function (): void {
 Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
     Route::get('/profile/edit', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
     Route::put('/profile/update', [ProfileController::class, 'updateProfil'])->name('profile.updateProfil');
+
+    Route::get('/notifikasi', function () {
+        return view('user.notifikasi');
+    })->name('user.notifikasi');
 });
 
 
