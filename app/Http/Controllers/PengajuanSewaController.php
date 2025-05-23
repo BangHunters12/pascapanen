@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class PengajuanSewaController extends Controller
 {
     public function formView($jenis)
-{
-    $viewPath = "user.layanan.$jenis";
-    
-    if (!view()->exists($viewPath)) {
-        abort(404);
-    }
+    {
+        $viewPath = "user.layanan.$jenis";
+        
+        if (!view()->exists($viewPath)) {
+            abort(404);
+        }
 
-   $sewaList = JenisSewa::all();
-    return view($viewPath, compact('sewaList'));
-}
+        $sewaList = JenisSewa::all();
+        return view($viewPath, compact('sewaList'));
+    }
 
     public function store(Request $request)
     {
@@ -30,11 +30,16 @@ class PengajuanSewaController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
+        // Ambil harga sewa berdasarkan id_sewa
+        $jenisSewa = JenisSewa::findOrFail($request->id_sewa);
+        $biayaSewa = $jenisSewa->harga_sewa * $request->lama_sewa_hari;
+
         PengajuanSewa::create([
             'id_petani' => Auth::user()->id_petani,
             'id_sewa' => $request->id_sewa,
             'tanggal_sewa' => $request->tanggal_sewa,
             'lama_sewa_hari' => $request->lama_sewa_hari,
+            'biaya_sewa' => $biayaSewa,
             'keterangan' => $request->keterangan,
         ]);
 

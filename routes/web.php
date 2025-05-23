@@ -12,6 +12,7 @@ use App\Http\Controllers\PengajuanSewaController;
 use App\Http\Controllers\PengajuanPadiController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProduksiBerasController;
+use App\Http\Controllers\LaporanTransaksiController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,14 +41,21 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
+     Route::resource('pengajuanpadi', PengajuanPadiController::class)->only(['update'])->names('pengajuanpadi');
+      Route::delete('pengajuanpadi/{id}', [PengajuanPadiController::class, 'destroy'])->name('pengajuanpadi.destroy');
     Route::resource('petani', PetaniController::class)->names('petani');
     Route::get('/pengajuan', [PengajuanPadiController::class, 'index'])->name('pengajuanpadi.index');
+  
+
     Route::post('/pengajuan/{id}/status', [PengajuanPadiController::class, 'updateStatus'])->name('pengajuanpadi.updateStatus');
     Route::resource('jenis-sewa', JenisSewaController::class)->names('jenis-sewa');
     Route::get('/pengajuan-sewa', [PengajuanSewaController::class, 'index'])->name('pengajuansewa.index');
     Route::post('/pengajuan-sewa/{id}/status', [PengajuanSewaController::class, 'updateStatus'])->name('pengajuansewa.updateStatus');
     Route::resource('produksi_beras', ProduksiBerasController::class)->names('produksi_beras');
 
+Route::get('/admin/laporan-transaksi', [LaporanTransaksiController::class, 'index'])->name('laporan.transaksi');
+Route::get('/admin/laporan-transaksi/cetak-pdf', [LaporanTransaksiController::class, 'cetakPDF'])->name('laporan.transaksi.cetak');
+Route::get('/admin/laporan-transaksi/cetak-html', [LaporanTransaksiController::class, 'cetakHTML'])->name('laporan.transaksi.cetak.html');
 
 
 
@@ -57,9 +65,9 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
 
 Route::middleware('auth')->group(function (): void {
 Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
-    Route::get('/profile/edit-profil', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
+    Route::get('/profile/edit-profile', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
     Route::put('/profile/update', [ProfileController::class, 'updateProfil'])->name('profile.updateProfil');
 });
 
 
-require __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php'; 

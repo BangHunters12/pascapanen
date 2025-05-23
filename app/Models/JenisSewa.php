@@ -12,7 +12,7 @@ class JenisSewa extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'nama_sewa'
+        'nama_sewa', 'harga_sewa',
     ];
 
     public function pengajuanSewa()

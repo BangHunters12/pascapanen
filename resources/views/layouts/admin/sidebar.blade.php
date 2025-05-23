@@ -48,8 +48,15 @@
                <li class="sidebar-item"><a class="sidebar-link" href="{{ route('produksi_beras.index') }}"><i class="ti ti-building"></i> Produksi Beras</a></li>
              
               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuansewa.index') }}"><i class="ti ti-tool"></i> Penyewaan</a></li> 
-               {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>
-               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>--}} 
+               {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ route('hutang') }}"><i class="ti ti-cash"></i> Hutang Petani</a></li>--}} 
+               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i class="ti ti-tool"></i> Pengajuan Padi</a></li>
+<li class="sidebar-item">
+    <a class="sidebar-link" href="{{ route('laporan.transaksi') }}">
+        <i class="ti ti-tool"></i> Detail Transaksi
+    </a>
+</li>
+
+
               <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i class="ti ti-news"></i> Berita</a></li>
 
                 <li class="nav-small-cap mt-2">
