@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\BeritaController;
@@ -41,3 +42,17 @@ Route::prefix('produk')->group(function () {
     Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
     Route::delete('/{id}', [ProdukController::class, 'destroy']);
 });
+// Notification
+Route::get('send-notification',[AdminController::class,'sendNotification']);
+
+
+Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
+
+ // Produk
+    Route::prefix('produk')->group(function () {
+        Route::get('/', [ProdukController::class, 'index']);
+        Route::get('/{id}', [ProdukController::class, 'show']);
+        Route::post('/', [ProdukController::class, 'store']);
+        Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
+        Route::delete('/{id}', [ProdukController::class, 'destroy']);
+    });

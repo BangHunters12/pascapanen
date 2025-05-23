@@ -160,6 +160,16 @@ body {
     color: gray;
 }
 
+.nav-link {
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  background-color: #f0f4f7;
+  color: #166534;
+}
+
 
 /*!
  * Bootstrap  v5.3.0-alpha1 (https://getbootstrap.com/)

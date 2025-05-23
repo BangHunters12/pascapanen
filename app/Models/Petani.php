@@ -33,7 +33,7 @@ class Petani extends Authenticatable
     protected $hidden = [
         'password',
     ];
-
+    
     function scopeCurrentMonth($query)
     {
         return $query->whereYear('created_at', now()->year)

@@ -33,4 +33,18 @@ class ProduksiBeras extends Model
     {
         return $this->belongsTo(Produk::class, 'id_produk');
     }
+
+    function scopeCurrentMonth($query)
+    {
+        return $query->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->count();
+    }
+
+    function scopeLastMonth($query)
+    {
+        return $query->whereYear('created_at', now()->subMonth()->year)
+            ->whereMonth('created_at', now()->subMonth()->month)
+            ->count();
+    }
 }

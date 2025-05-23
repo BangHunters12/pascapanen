@@ -15,7 +15,6 @@
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_bajak']) }}" class="filter-btn {{ Request::is('layanan/alat_bajak') ? 'active' : '' }}">Alat Bajak</a></li>
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_panen']) }}" class="filter-btn {{ Request::is('layanan/alat_panen') ? 'active' : '' }}">Alat Panen</a></li>
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'tenagatanam']) }}" class="filter-btn {{ Request::is('layanan/tenagatanam') ? 'active' : '' }}">Tenaga Tanam</a></li>
-        <li><a href="{{ route('user.layanan.form', ['jenis' => 'petanibaru']) }}" class="filter-btn {{ Request::is('layanan/petanibaru') ? 'active' : '' }}">Petani Baru</a></li>
     </ul>
 </div>
 
