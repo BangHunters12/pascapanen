@@ -10,18 +10,14 @@
     <p class="lead">Pesan layanan yang anda butuhkan dengan cepat dan mudah</p>
   </div>
 
-    {{-- Navigasi Layanan (ul seperti filter isotope) --}}
    <div style="display: flex; justify-content: center; margin-bottom: 40px;">
     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100" style="display: flex; gap: 10px; list-style: none; padding: 0; margin: 0;">
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_bajak']) }}" class="filter-btn {{ Request::is('layanan/alat_bajak') ? 'active' : '' }}">Alat Bajak</a></li>
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'alat_panen']) }}" class="filter-btn {{ Request::is('layanan/alat_panen') ? 'active' : '' }}">Alat Panen</a></li>
         <li><a href="{{ route('user.layanan.form', ['jenis' => 'tenagatanam']) }}" class="filter-btn {{ Request::is('layanan/tenagatanam') ? 'active' : '' }}">Tenaga Tanam</a></li>
-        <li><a href="{{ route('user.layanan.form', ['jenis' => 'petanibaru']) }}" class="filter-btn {{ Request::is('layanan/petanibaru') ? 'active' : '' }}">Petani Baru</a></li>
     </ul>
 </div>
 
-
-    {{-- Gambar --}}
     <div class="mb-4 text-center">
         <img src="{{ asset('assets/images/logos/tenagatanam.jpg') }}" alt="Alat Bajak" class="img-fluid rounded shadow-sm">
     </div>
@@ -73,12 +69,14 @@
                     <div class="mb-3">
                       <label for="id_sewa" class="form-label">Pilih Jenis Sewa:</label>
                       <select name="id_sewa" id="id_sewa" class="form-select" required>
-                      <option value="" selected disabled>-- Pilih Jenis Sewa --</option>
-                      @foreach($sewaList as $sewa)
-                      <option value="{{ $sewa->id_sewa }}">{{ $sewa->nama_sewa }}</option>
-                      @endforeach
-                    </select>
-                  </div>
+                          <option value="" selected disabled>-- Pilih Jenis Sewa --</option>
+                          @foreach($sewaList as $sewa)
+                              <option value="{{ $sewa->id_sewa }}" data-harga="{{ $sewa->harga_sewa }}">
+                                {{ $sewa->nama_sewa }}
+                              </option>
+                          @endforeach
+                      </select>
+                    </div>
 
                     <div class="mb-3">
                         <label for="tanggal_sewa" class="form-label">Tanggal Sewa:</label>
@@ -87,7 +85,13 @@
 
                     <div class="mb-3">
                         <label for="lama_sewa_hari" class="form-label">Lama Sewa (hari):</label>
-                        <input type="number" name="lama_sewa_hari" class="form-control" min="1" required>
+                        <input type="number" name="lama_sewa_hari" id="lama_sewa_hari" class="form-control" min="1" required>
+                    </div>
+
+                    <!-- Tambahan: Total Biaya -->
+                    <div class="mb-3">
+                      <label class="form-label">Total Biaya Sewa:</label>
+                      <input type="text" id="total_biaya" class="form-control" readonly value="Rp 0">
                     </div>
 
                     <div class="mb-3">
@@ -104,17 +108,32 @@
     </div>
 </div>
 
-@if (session('success'))
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-        <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    {{ session('success') }}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-@endif
+<!-- Script untuk update total biaya otomatis -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const idSewaSelect = document.getElementById('id_sewa');
+    const lamaSewaInput = document.getElementById('lama_sewa_hari');
+    const totalBiayaInput = document.getElementById('total_biaya');
+
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(angka);
+    }
+
+    function updateTotalBiaya() {
+        const selectedOption = idSewaSelect.options[idSewaSelect.selectedIndex];
+        const hargaSewa = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
+        const lamaSewa = parseInt(lamaSewaInput.value) || 0;
+
+        if (hargaSewa && lamaSewa > 0) {
+            totalBiayaInput.value = formatRupiah(hargaSewa * lamaSewa);
+        } else {
+            totalBiayaInput.value = 'Rp 0';
+        }
+    }
+
+    idSewaSelect.addEventListener('change', updateTotalBiaya);
+    lamaSewaInput.addEventListener('input', updateTotalBiaya);
+});
+</script>
 
 @endsection
