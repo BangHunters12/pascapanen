@@ -1,10 +1,9 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
+        <img src="{{ asset('assets/images/logos/logoapk.png') }}" alt="Logo" style="height: 70px; width: 70px;">
         <div class="logo d-flex align-items-center me-auto me-lg-0">
-            <img src="{{ asset('assets/images/logos/logoapk.png') }}" alt="Logo" style="height: 40px;">
-        </div>
 
+        </div>
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="{{ url('/#beranda') }}" class="nav-link active">Beranda</a></li>
@@ -50,7 +49,7 @@
 
                     @if (Auth::user()->logo)
                         <img src="{{ asset('storage/' . Auth::user()->logo) }}" alt="Profile" class="rounded-circle"
-                            width="32" height="32">
+                            width="55" height="55">
                     @else
                         <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="Profile Default"
                             class="rounded-circle" width="32" height="32">
