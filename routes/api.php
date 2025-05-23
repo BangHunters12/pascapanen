@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProdukController;
+use App\Http\Controllers\Api\LogoController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +26,10 @@ Route::get('/berita/{id}', [BeritaController::class, 'show']);
 
 // Route::middleware('auth:sanctum')->put('/profil/update', [ProfileController::class, 'update']);
 // Route::middleware('auth:sanctum')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile/update', [ProfileController::class, 'update']);
+    Route::post('/profile/upload-image', [LogoController::class, 'uploadImage']);
 });
 
 

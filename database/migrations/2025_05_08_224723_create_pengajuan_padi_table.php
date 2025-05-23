@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('jumlah_karung');
             $table->date('tanggal_pengajuan');
             $table->enum('status', ['menunggu persetujuan', 'disetujui', 'ditolak'])->default('menunggu persetujuan');
+            $table->integer('jumlah_kg')->nullable();
+            $table->integer('total_harga')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         

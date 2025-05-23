@@ -22,12 +22,14 @@ class ProfileController extends Controller
 
         $request->validate([
             'nama_lengkap' => 'required',
+            'username' => 'required',
             'no_telp' => 'required',
             'gender' => 'required',
             'alamat' => 'required',
+            'logo' => 'required',
         ]);
 
-        $user->update($request->only('nama_lengkap', 'no_telp', 'gender', 'alamat'));
+        $user->update($request->only('nama_lengkap', 'username', 'no_telp', 'gender', 'alamat', 'logo'));
 
         return response()->json(['message' => 'Profil diperbarui']);
     }
