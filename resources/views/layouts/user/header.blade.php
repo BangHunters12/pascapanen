@@ -11,20 +11,20 @@
                 <li><a href="{{ url('/#about') }}" class="nav-link active">Tentang kami</a></li>
                 <li><a href="{{ route('user.penjualan_padi.penjualanpadi') }}" class="nav-link">Penjualan Padi</a></li>
 
-                {{-- <li class="dropdown"><a href="#"><span>Produk</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('user.produk.beras') }}" class="dropdown-item" >Beras</a></li>
-                        <li><a href="{{ route('user.produk.pupuk') }}" class="dropdown-item" >Pupuk</a></li>
-                        <li><a href="{{ route('user.produk.obat') }}" class="dropdown-item" >Obat-obatan</a></li>
-                    </ul>
-                </li> --}}
+                <li class="dropdown">
+    <a href="#"><span>Produk</span> <i class="bi bi-chevron-down"></i></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ route('user.produk.kategori', 'beras') }}" class="dropdown-item">Beras</a></li>
+        <li><a href="{{ route('user.produk.kategori', 'pupuk') }}" class="dropdown-item">Pupuk</a></li>
+        <li><a href="{{ route('user.produk.kategori', 'obat') }}" class="dropdown-item">Obat-obatan</a></li>
+    </ul>
+</li>
 
                 <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
     <ul class="dropdown-menu">
         <li><a href="{{ url('layanan/alat_bajak') }}" class="dropdown-item">Alat Bajak</a></li>
         <li><a href="{{ url('layanan/alat_panen') }}" class="dropdown-item">Alat Panen</a></li>
         <li><a href="{{ url('layanan/tenagatanam') }}" class="dropdown-item">Tenaga Tanam</a></li>
-        <li><a href="{{ url('layanan/petanibaru') }}" class="dropdown-item">Petani Baru</a></li>
     </ul>
 </li>
 
@@ -61,7 +61,7 @@
                     @if (Auth::user()->role === 'admin')
                     <li> <a class="dropdown-item" href="{{route('dashboard')}}">Admin Page</a></li>
                     @endif
-                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('profile.editProfil') }}">Profile</a></li>
                     <li>
                         <li>
         <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ route('user.notifikasi') }}">
