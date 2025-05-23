@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\BeritaController;
@@ -20,6 +21,10 @@ Route::post('/petani/login', [LoginController::class, 'login']);
 // Berita
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::get('/berita/{id}', [BeritaController::class, 'show']);
+
+// Notification
+Route::get('send-notification',[AdminController::class,'sendNotification']);
+
 
 Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
 

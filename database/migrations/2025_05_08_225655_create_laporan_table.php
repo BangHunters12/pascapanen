@@ -23,13 +23,13 @@ return new class extends Migration
             $table->unsignedBigInteger('id_penjualan')->nullable();
             $table->unsignedBigInteger('id_pengiriman')->nullable();
             $table->timestamps();
-        
+
             $table->foreign('id_petani')->references('id_petani')->on('petani');
             $table->foreign('id_penyewaan')->references('id_penyewaan')->on('penyewaan');
             $table->foreign('id_penjualan')->references('id_penjualan')->on('penjualan_produk');
             $table->foreign('id_pengiriman')->references('id_pengiriman')->on('pengiriman_padi');
         });
-        
+
     }
 
     /**

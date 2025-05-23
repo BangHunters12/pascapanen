@@ -33,7 +33,7 @@ Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('dashboard', [AdminController::class,'index']
     )->name('dashboard');
-    Route::get('send-notification',[AdminController::class,'sendNotification']);
+
 
 
 // -------------------------------------------------------------------------

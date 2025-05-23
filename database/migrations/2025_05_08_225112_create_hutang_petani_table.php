@@ -23,7 +23,7 @@ return new class extends Migration
         
             $table->foreign('id_petani')->references('id_petani')->on('petani');
         });
-        
+
     }
 
     /**

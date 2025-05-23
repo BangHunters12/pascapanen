@@ -1,5 +1,25 @@
 @extends('layouts/admin.admin')
 
+
+@push('styles')
+    <style>
+        .click-here {
+            opacity: 0;
+        }
+
+        .card > * {
+            user-select: none;
+            /* Standard syntax */
+            -webkit-user-select: none;
+            /* Safari/Chrome */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE/Edge */
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid mt-0 p-3">
         <h2 class="fw-bold"><i class="bi bi-speedometer2"></i> Dashboard</h2>
@@ -9,43 +29,78 @@
         <div class="row g-3">
             <!-- Farmer Stats -->
             <div class="col-12 col-sm-6 col-md-3">
-                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <i class="bi bi-people fs-2 mb-2"></i>
-                    <h5>Total Petani</h5>
-                    <p class="fs-3 fw-bold"><span>42</span></p>
-                    <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                <a href="{{route('petani.index')}}" style="text-decoration:none">
+                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white position-relative" id="cardSummary">
+                    <p class="position-absolute top-0 end-0 m-3 click-here">
+                        <i class="bi bi-hand-index-fill"></i>
+                    </p>
+                    <div>
+                        <i class="bi bi-people fs-2 mb-2"></i>
+                        <h5>Total Petani</h5>
+                        <p class="fs-3 fw-bold"><span>42</span></p>
+                        <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                    </div>
+
+
                 </div>
+                </a>
+
             </div>
 
             <!-- Production Overview -->
             <div class="col-12 col-sm-6 col-md-3">
+                <a href="{{route('padi.index')}}" style="text-decoration: none">
                 <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <i class="bi bi-box-seam fs-2 mb-2"></i>
-                    <h5>Produksi Padi</h5>
-                    <p class="fs-3 fw-bold"><span>1,850</span> kg</p>
-                    <span class="fs-6">⬆ 8% dari bulan lalu</span>
+                    <p class="position-absolute top-0 end-0 m-3 click-here">
+                        <i class="bi bi-hand-index-fill"></i>
+                    </p>
+
+                    <div>
+                        <i class="bi bi-box-seam fs-2 mb-2"></i>
+                        <h5>Produksi Padi</h5>
+                        <p class="fs-3 fw-bold"><span>1,850</span> kg</p>
+                        <span class="fs-6">⬆ 8% dari bulan lalu</span>
+                    </div>
                 </div>
+                </a>
+
             </div>
 
             <!-- Inventory Alerts -->
             <div class="col-12 col-sm-6 col-md-3">
+                 <a href="{{route('produk.index')}}" style="text-decoration:none">
                 <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <i class="bi bi-exclamation-triangle fs-2 mb-2"></i>
-                    <h5>Stok Rendah</h5>
-                    <p class="fs-3 fw-bold"><span>3</span> Produk</p>
-                    <span class="fs-6">Perlu restock</span>
+                    <p class="position-absolute top-0 end-0 m-3 click-here">
+                        <i class="bi bi-hand-index-fill"></i>
+                    </p>
+
+                    <div>
+                        <i class="bi bi-exclamation-triangle fs-2 mb-2"></i>
+                        <h5>Stok Rendah</h5>
+                        <p class="fs-3 fw-bold"><span>3</span> Produk</p>
+                        <span class="fs-6">Perlu restock</span>
+                    </div>
+
                 </div>
+                 </a>
             </div>
 
             <!-- Financial Summary -->
             <div class="col-12 col-sm-6 col-md-3">
+                <a href="" style="text-decoration: none">
                 <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <i class="bi bi-cash-coin fs-2 mb-2"></i>
-                    <h5>Pendapatan</h5>
-                    <p class="fs-3 fw-bold">Rp <span>24,5jt</span></p>
-                    <span class="fs-6">⬆ 15% dari bulan lalu</span>
+                    <p class="position-absolute top-0 end-0 m-3 click-here">
+                        <i class="bi bi-hand-index-fill"></i>
+                    </p>
+                    <div>
+                        <i class="bi bi-cash-coin fs-2 mb-2"></i>
+                        <h5>Pendapatan</h5>
+                        <p class="fs-3 fw-bold">Rp <span>24,5jt</span></p>
+                        <span class="fs-6">⬆ 15% dari bulan lalu</span>
+                    </div>
                 </div>
             </div>
+            </a>
         </div>
 
         <!-- Main Dashboard Sections -->
@@ -226,7 +281,7 @@
                 }
             };
             var productionChart = new ApexCharts(document.querySelector("#productionTrendChart"),
-            productionOptions);
+                productionOptions);
             productionChart.render();
 
             // Gender Distribution Chart
@@ -275,10 +330,9 @@
 
 @push('animations')
     <script>
-
-        function percentageDiff(currentValue , lastValue){
-            const diff = currentValue-lastValue;
-            return (diff/lastValue)*100;
+        function percentageDiff(currentValue, lastValue) {
+            const diff = currentValue - lastValue;
+            return (diff / lastValue) * 100;
         }
         const {
             animate,
@@ -286,6 +340,9 @@
         } = anime;
 
         const $cardNumber = utils.$("#cardSummary p span");
+        const $card = utils.$('#cardSummary');
+        const $clickHereText = utils.$('click-here');
+
 
         let increment = 0;
         const petani = @json($petani);
@@ -293,7 +350,9 @@
         const produksiBeras = @json($produksiBeras);
         const pendapatan = @json($pendapatan);
 
-        const cardNumberValue = [petani.Total,produksiBeras.Total, 0, pendapatan.Total]
+        console.log(pendapatan['CurrentMonth']);
+
+        const cardNumberValue = [petani.Total, produksiBeras.Total, 0, pendapatan.Total]
 
         animate('#cardSummary', {
             y: [{
@@ -308,13 +367,52 @@
                     delay: 200
                 }
             ],
-            delay: (_,i)=>i*50,
+            delay: (_, i) => i * 50,
+
         });
 
+        $card.forEach(element => {
+            const $click = element.querySelector('.click-here')
+
+            element.addEventListener('mouseenter', () => {
+                animate(element, {
+                    y: '-1rem',
+                    ease: 'outExpo',
+                    duration: 400,
+                    cursor: 'pointer',
+                    onBegin: () => {
+                        animate($click, {
+                            opacity: 1,
+                            duration: 100
+                        })
+                    }
+                });
+
+
+            });
+
+            element.addEventListener('mouseleave', () => {
+                animate(element, {
+                    y: '0',
+                    ease: 'outExpo',
+                    duration: 400,
+                    onBegin: () => {
+                        animate($click, {
+                            opacity: 0,
+                            duration: 100
+                        })
+                    }
+                });
+            })
+
+        });
         $cardNumber.forEach(element => {
             element.innerHTML = 0;
-            const obj = {value: 0}
-            
+            const obj = {
+                value: 0
+            }
+
+
             animate(obj, {
                 value: cardNumberValue[increment],
                 ease: 'linear',
@@ -325,6 +423,5 @@
             increment++;
 
         });
-
     </script>
 @endpush
