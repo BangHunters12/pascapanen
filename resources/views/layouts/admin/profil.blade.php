@@ -3,7 +3,7 @@
         @if(Auth::user()->logo)
             <img src="{{ asset('storage/' . Auth::user()->logo) }}" alt="Profil" class="rounded-circle" width="40" height="40">
         @else
-            <img src="/assets/images/logos/favicon.png" alt="Admin" class="rounded-circle" width="40" height="40">
+            <img src="{{asset('assets/images/logos/favicon.png')}}" alt="Admin" class="rounded-circle" width="40" height="40">
         @endif
         <span class="ms-2">{{ Auth::user()->nama_lengkap }}</span>
     </button>

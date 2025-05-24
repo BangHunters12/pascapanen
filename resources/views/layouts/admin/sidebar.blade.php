@@ -1,7 +1,7 @@
 <aside class="left-sidebar text-dark" id="sidebar">
   <div class="sidebar-header d-flex align-items-center justify-content-between p-3 mb-3">
     <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
-      <img src="/assets/images/logos/dark-logo.svg" width="200" alt="Logo" />
+      <img src="{{asset('assets/images/logos/dark-logo.svg')}}" width="200" alt="Logo" />
     </a>
     {{-- <button class="btn btn-link sidebar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar"> --}}
       <i class="ti ti-menu"></i>
@@ -84,6 +84,11 @@
       <li class="sidebar-item">
         <a class="sidebar-link" href="{{ route('berita.index') }}">
           <i class="ti ti-news"></i> Berita
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="{{ route('laporan.index') }}">
+          <i class="ti ti-news"></i> Laporan
         </a>
       </li>
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\JenisSewaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengajuanSewaController;
 use App\Http\Controllers\PengajuanPadiController;
 use App\Http\Controllers\ProdukController;
@@ -49,6 +50,7 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     Route::get('/pengajuan-sewa', [PengajuanSewaController::class, 'index'])->name('pengajuansewa.index');
     Route::post('/pengajuan-sewa/{id}/status', [PengajuanSewaController::class, 'updateStatus'])->name('pengajuansewa.updateStatus');
     Route::resource('produksi_beras', ProduksiBerasController::class)->names('produksi_beras');
+    Route::resource('/laporan',LaporanController::class)->names('laporan');
     // Route::get('haha/dashboard', [AdminController::class, 'index'])->name('admin/dashboard');
     // Route lainnya tinggal tulis 'route-name' saja tanpa 'admin.' di awal
 });
