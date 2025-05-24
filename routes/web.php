@@ -23,8 +23,8 @@ Route::get('/layanan/{jenis}', [PengajuanSewaController::class, 'formView'])->na
 Route::get('/produk/{kategori}', [HomeController::class, 'produkByKategori'])->name('user.produk.kategori');
 
 Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
-Route::post('/pengajuan-padi/store', [PengajuanPadiController::class, 'store'])->name('pengajuanpadi.store');
-Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('pengajuansewa.store');
+    Route::post('/pengajuan-padi/store', [PengajuanPadiController::class, 'store'])->name('pengajuanpadi.store');
+    Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('pengajuansewa.store');
 
 
     // Route::get('dashboard', [UseController::class, 'index'])->name('dashboard');
@@ -33,12 +33,10 @@ Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('
 
 // --------------------[Belum Selesai]--------------------------------------
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
-    Route::get('dashboard', [AdminController::class,'index']
+    Route::get(
+        'dashboard',
+        [AdminController::class, 'index']
     )->name('dashboard');
-
-
-
-// -------------------------------------------------------------------------
 
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
@@ -56,7 +54,7 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
 });
 
 Route::middleware('auth')->group(function (): void {
-Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
+    Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
     Route::get('/profile/edit', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
     Route::put('/profile/update', [ProfileController::class, 'updateProfil'])->name('profile.updateProfil');
 
