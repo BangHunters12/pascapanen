@@ -63,6 +63,23 @@
                     @endif
                     <li><a class="dropdown-item" href="{{ route('profile.profil') }}">Profile</a></li>
                     <li>
+<<<<<<< HEAD
+                        <li>
+        {{-- <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ route('user.notifikasi') }}">
+            Notifikasi
+            @php
+                $unreadCount = Auth::user()->unreadNotifications->count();
+            @endphp
+            @if ($unreadCount > 0)
+                <span class="badge bg-danger rounded-pill ms-2">{{ $unreadCount }}</span>
+            @endif
+        </a> --}}
+    </li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+=======
                     <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                             href="{{ route('user.notifikasi') }}">
@@ -79,6 +96,7 @@
                         @csrf
                         <button type="submit" class="dropdown-item">Logout</button>
                     </form>
+>>>>>>> 8ffd3a83c94155c05419011edc99aca36086d19b
                     </li>
                 </ul>
             </div>

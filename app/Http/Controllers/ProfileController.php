@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
     public function editProfil()
     {
-        return view('profile.edit-profil');
+        return view('profile.editProfil');
     }
 
     public function updateProfil(Request $request)

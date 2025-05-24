@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.png')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
+
     @stack('styles')
 </head>
 <body>
