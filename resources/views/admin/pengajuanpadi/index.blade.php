@@ -69,6 +69,9 @@
                 @endforelse
             </tbody>
         </table>
+        <a href="/cetak" target="_blank" class="btn btn-success mb-2">Cetak HTML</a>
+<a href="/cetak" class="btn btn-danger mb-2">Cetak PDF</a>
+
     </div>
 </div>
 

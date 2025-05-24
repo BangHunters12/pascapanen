@@ -47,9 +47,8 @@
                         <td>{{ $pengajuan->keterangan ?? '-' }}</td>
                         <td>
                             @if ($pengajuan->status === 'menunggu persetujuan')
-                                <form action="{{ route('pengajuanpadi.update', $pengajuan->id_pengajuan) }}" method="POST" class="modal-content">
+                                <form action="{{ route('pengajuansewa.updateStatus', $pengajuan->id_pengajuan) }}" method="POST">
                                     @csrf
-                                     @method('PUT')
                                     <div class="input-group">
                                         <select name="status" class="form-select form-select-sm" required style="border-color: #2F8F2F;">
                                             <option value="" disabled selected>Pilih</option>

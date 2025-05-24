@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanPadi;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\PengajuanPadiStatusNotification;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengajuanPadiController extends Controller
 {
@@ -111,6 +112,21 @@ public function destroy($id)
     $pengajuan->delete();
 
     return redirect()->route('pengajuanpadi.index')->with('success', 'Data pengajuan berhasil dihapus.');
+}
+
+
+public function cetakSemuaHTML()
+{
+    
+    $pengajuanList = PengajuanPadi::with('petani', 'padi')->get();
+    return view('admin.pengajuanpadi.cetak', compact('pengajuanList'));
+}
+
+public function cetakSemuaPDF()
+{
+    $pengajuanList = PengajuanPadi::with('petani', 'padi')->get();
+    $pdf = Pdf::loadView('admin.pengajuanpadi.cetak', compact('pengajuanList'))->setPaper('a4', 'landscape');
+    return $pdf->download('Data_Pengajuan_Padi.pdf');
 }
 
 }

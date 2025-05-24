@@ -22,10 +22,15 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/berita/{id}', [HomeController::class, 'detail'])->name('berita.detail');
 Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
 Route::get('/layanan/{jenis}', [PengajuanSewaController::class, 'formView'])->name('user.layanan.form');
+Route::get('/produk/{kategori}', [HomeController::class, 'produkByKategori'])->name('user.produk.kategori');
+Route::get('/layanan/alat-bajak', function () {
+    return view('layanan.alat_bajak');
+})->name('layanan.alat_bajak');
 
 Route::middleware(['auth', 'PetaniMiddleware'])->group(function () {
 Route::post('/pengajuan-padi/store', [PengajuanPadiController::class, 'store'])->name('pengajuanpadi.store');
 Route::post('/layanan/store', [PengajuanSewaController::class, 'store'])->name('pengajuansewa.store');
+Route::get('/pengajuan-sewa/create', [PengajuanSewaController::class, 'create'])->name('pengajuansewa.create');
 
 
     // Route::get('dashboard', [UseController::class, 'index'])->name('dashboard');
@@ -45,6 +50,9 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
       Route::delete('pengajuanpadi/{id}', [PengajuanPadiController::class, 'destroy'])->name('pengajuanpadi.destroy');
     Route::resource('petani', PetaniController::class)->names('petani');
     Route::get('/pengajuan', [PengajuanPadiController::class, 'index'])->name('pengajuanpadi.index');
+Route::get('/pengajuanpadi/cetak/html', [PengajuanPadiController::class, 'cetakSemuaHTML'])->name('pengajuan_padi.cetak_html');
+Route::get('/pengajuanpadi/cetak/pdf', [PengajuanPadiController::class, 'cetakSemuaPDF'])->name('pengajuan_padi.cetak_pdf');
+
   
 
     Route::post('/pengajuan/{id}/status', [PengajuanPadiController::class, 'updateStatus'])->name('pengajuanpadi.updateStatus');
