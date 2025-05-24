@@ -9,20 +9,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProdukFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
-        $category = ["padi","alat","obat"];
+        $kategori = ['beras', 'pupuk', 'obat'];
+        $satuan = ['kg', 'ltr', 'sak'];
+
         return [
-            "nama_produk"=>fake()->word(),
-            "kategori"=>$category[rand(0,2)],
-            "harga"=>fake()->randomFloat(2,500000,1000000),
-            "stok"=>fake()->numberBetween(100,10000),
-            "satuan"=>1
+            'nama_produk' => $this->faker->words(2, true), // contoh: "Beras Premium"
+            'kategori' => $this->faker->randomElement($kategori),
+            'harga' => $this->faker->randomFloat(2, 10000, 100000), // harga dalam Rupiah
+            'stok' => $this->faker->numberBetween(50, 500),
+            'satuan' => $this->faker->randomElement($satuan),
+            'gambar' => null, // bisa diganti $this->faker->imageUrl()
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
