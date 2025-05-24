@@ -17,15 +17,15 @@ return new class extends Migration
             $table->unsignedBigInteger('id_sewa');
             $table->date('tanggal_sewa');
             $table->integer('lama_sewa_hari');
-            $table->integer('total_harga'); 
+            $table->integer('total_harga');
             $table->enum('status', ['menunggu persetujuan', 'disetujui', 'ditolak'])->default('menunggu persetujuan');
             $table->text('keterangan')->nullable();
             $table->timestamps();
-        
+
             $table->foreign('id_petani')->references('id_petani')->on('petani');
             $table->foreign('id_sewa')->references('id_sewa')->on('jenis_sewa');
         });
-        
+
     }
 
     /**

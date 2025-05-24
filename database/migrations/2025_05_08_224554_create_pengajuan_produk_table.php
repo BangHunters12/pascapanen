@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('status');
             $table->text('keterangan');
             $table->timestamps();
-        
+
             $table->foreign('id_petani')->references('id_petani')->on('petani');
             $table->foreign('id_produk')->references('id_produk')->on('produk');
         });

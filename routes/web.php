@@ -8,6 +8,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\PadiController;
 use App\Http\Controllers\JenisSewaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengajuanSewaController;
 use App\Http\Controllers\PengajuanPadiController;
 use App\Http\Controllers\ProdukController;
@@ -39,9 +40,10 @@ Route::get('/pengajuan-sewa/create', [PengajuanSewaController::class, 'create'])
 
 // --------------------[Belum Selesai]--------------------------------------
 Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function () {
-    Route::get('dashboard', [AdminController::class,'index']
+    Route::get(
+        'dashboard',
+        [AdminController::class, 'index']
     )->name('dashboard');
-// -------------------------------------------------------------------------
 
     Route::resource('padi', PadiController::class)->names('padi');
     Route::resource('berita', BeritaController::class)->names('berita');
@@ -72,8 +74,8 @@ Route::get('/admin/laporan-transaksi/cetak-html', [LaporanTransaksiController::c
 });
 
 Route::middleware('auth')->group(function (): void {
-Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
-    Route::get('/profile/edit-profile', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
+    Route::get('/profile', [ProfileController::class, 'showProfil'])->name('profile.profil');
+    Route::get('/profile/edit', [ProfileController::class, 'editProfil'])->name('profile.editProfil');
     Route::put('/profile/update', [ProfileController::class, 'updateProfil'])->name('profile.updateProfil');
 });
 
