@@ -9,19 +9,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BeritaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'judul' => $this->faker->sentence(6),
+            'judul' => $this->faker->sentence(6, true),
             'isi' => $this->faker->paragraphs(3, true),
-            'gambar' => null, // bisa juga pakai: $this->faker->imageUrl(640, 480, 'news', true)
-            'created_at' => now(),
-            'updated_at' => now(),
+            'gambar' => 'gambar_berita/IUNkaynWk4fgvvj4oIVjCvnjbsWDzeq4fVAcSlD1.jpg', 
         ];
     }
 }
