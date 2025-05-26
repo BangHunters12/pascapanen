@@ -4,26 +4,17 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Padi>
- */
 class PadiFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            "nama_padi"=>fake()->word(),
-            "warna"=>fake()->colorName(),
-            "bentuk"=>"bulat",
-            "tekstur"=>"bagus",
-            "harga"=>fake()->randomFloat(2,50000,1000000),
-            "stok"=>fake()->randomNumber(),
-            "gambar"=>"UIIA"
+            'nama_padi' => $this->faker->word() . ' Padi',
+            'warna' => $this->faker->safeColorName(),
+            'bentuk' => $this->faker->randomElement(['Bulat', 'Lonjong', 'Panjang']),
+            'tekstur' => $this->faker->randomElement(['Halus', 'Kasar', 'Sedang']),
+            'harga' => $this->faker->numberBetween(5000, 25000),
+            'gambar' => 'gambar_padi/3IOhaUqOm1ssnhA5N94N3BHyaTCfs83yPpFL4Smy.jpg', // akan diganti/override oleh seeder jika perlu
         ];
     }
 }

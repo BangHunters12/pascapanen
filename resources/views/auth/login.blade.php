@@ -6,7 +6,7 @@
     <title>Halaman Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <style>
         body {
             background: #e6f4ea;
@@ -65,6 +65,16 @@
         .forgot-link:hover {
             color: #157347;
         }
+
+        .register-link {
+            font-size: 1rem;
+            color: #198754;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +127,11 @@
                         </button>
                     </div>
                 </form>
+
+                <!-- Link to Register -->
+                <div class="text-center mt-3">
+                    <p>Belum punya akun? <a href="{{ route('register') }}" class="register-link">Daftar di sini</a></p>
+                </div>
             </div>
         </div>
     </div>
