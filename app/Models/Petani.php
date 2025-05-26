@@ -16,6 +16,7 @@ class Petani extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'petani';
     // protected $guard = 'petani';
+    public $incrementing = true;
     protected $primaryKey = 'id_petani';
     protected $fillable = [
         'nama_lengkap',
@@ -32,18 +33,18 @@ class Petani extends Authenticatable
     protected $hidden = [
         'password',
     ];
-
+    
     function scopeCurrentMonth($query)
     {
-       return $query->whereYear('created_at', now()->year)
+        return $query->whereYear('created_at', now()->year)
             ->whereMonth('created_at', now()->month)
             ->count();
     }
 
-    function scopeLastMonth($query){
+    function scopeLastMonth($query)
+    {
         return $query->whereYear('created_at', now()->subMonth()->year)
             ->whereMonth('created_at', now()->subMonth()->month)
             ->count();
-
     }
 }

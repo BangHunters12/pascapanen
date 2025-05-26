@@ -45,7 +45,7 @@ class PetaniController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:petani',
+            'username' => 'required|string|max:255|unique:petani,alpha_num',
             'email' => 'required|email|unique:petani',
             'gender' => 'required|in:Laki-laki,Perempuan',
             'no_telp' => 'required|string',

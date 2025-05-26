@@ -31,28 +31,28 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-        'nama_lengkap' => ['required', 'string', 'max:255'],
-        'username'     => ['required', 'string', 'max:255', 'unique:petani'],
-        'gender'       => ['required', 'in:Laki-laki,Perempuan'],
-        'email'        => ['required', 'string', 'email', 'max:255', 'unique:petani'],
-        'no_telp'      => ['required', 'string', 'max:15'],
-        'alamat'       => ['required', 'string'],
-        'password'     => ['required', 'confirmed', Rules\Password::defaults()],
-    ]);
+            'nama_lengkap' => ['required', 'string', 'max:255'],
+            'username'     => ['required', 'string', 'max:255', 'unique:petani', 'alpha_num'],
+            'gender'       => ['required', 'in:Laki-laki,Perempuan'],
+            'email'        => ['required', 'string', 'email', 'max:255', 'unique:petani'],
+            'no_telp'      => ['required', 'string', 'max:15'],
+            'alamat'       => ['required', 'string'],
+            'password'     => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-    $petani = Petani::create([
-        'nama_lengkap' => $request->nama_lengkap,
-        'username'     => $request->username,
-        'gender'       => $request->gender,
-        'email'        => $request->email,
-        'no_telp'      => $request->no_telp,
-        'alamat'       => $request->alamat,
-        'password'     => Hash::make($request->password),
-        'role'         => 'petani',
-    ]);
+        $petani = Petani::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'username'     => $request->username,
+            'gender'       => $request->gender,
+            'email'        => $request->email,
+            'no_telp'      => $request->no_telp,
+            'alamat'       => $request->alamat,
+            'password'     => Hash::make($request->password),
+            'role'         => 'petani',
+        ]);
 
-    Auth::login($petani);
+        Auth::login($petani);
 
-    return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
     }
 }

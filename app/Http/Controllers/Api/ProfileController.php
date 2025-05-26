@@ -1,23 +1,36 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Petani;
 
 class ProfileController extends Controller
 {
-    public function profil()
+    public function show(Request $request)
     {
-        $petani = Auth::guard('sanctum')->user();
-
         return response()->json([
-            'nama_lengkap' => $petani->nama_lengkap,
-            'username'     => $petani->username,
-            'email'        => $petani->email,
-            'no_telepon'   => $petani->no_telp,
-            'alamat'       => $petani->alamat,
-            'jenis_kelamin'=> $petani->gender,
-            'logo'         => $petani->logo,
+            'data' => $request->user(), // pastikan model User atau Petani sudah sesuai
         ]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => 'required',
+            'no_telp' => 'required',
+            'gender' => 'required',
+            'alamat' => 'required',
+            'logo' => 'required',
+        ]);
+
+        $user->update($request->only('nama_lengkap', 'username', 'no_telp', 'gender', 'alamat', 'logo'));
+
+        return response()->json(['message' => 'Profil diperbarui']);
     }
 }

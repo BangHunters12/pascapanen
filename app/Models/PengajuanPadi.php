@@ -14,14 +14,15 @@ class PengajuanPadi extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id_pengajuan',
-        'id_petani',
-        'id_padi',
-        'perlu_mobil',
-        'jumlah_karung',
-        'tanggal_pengajuan',
-        'status',
-        'keterangan',
+    'id_petani',
+    'id_padi',
+    'perlu_mobil',
+    'jumlah_karung',
+    'tanggal_pengajuan',
+    'status',
+    'jumlah_kg',
+    'total_harga',
+    'keterangan',
     ];
 
     // Relasi ke Petani
