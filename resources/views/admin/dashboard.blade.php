@@ -7,7 +7,7 @@
             opacity: 0;
         }
 
-        .card > * {
+        .card>* {
             user-select: none;
             /* Standard syntax */
             -webkit-user-select: none;
@@ -29,76 +29,77 @@
         <div class="row g-3">
             <!-- Farmer Stats -->
             <div class="col-12 col-sm-6 col-md-3">
-                <a href="{{route('petani.index')}}" style="text-decoration:none">
-                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white position-relative" id="cardSummary">
-                    <p class="position-absolute top-0 end-0 m-3 click-here">
-                        <i class="bi bi-hand-index-fill"></i>
-                    </p>
-                    <div>
-                        <i class="bi bi-people fs-2 mb-2"></i>
-                        <h5>Total Petani</h5>
-                        <p class="fs-3 fw-bold"><span>42</span></p>
-                        <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                <a href="{{ route('petani.index') }}" style="text-decoration:none">
+                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white position-relative"
+                        id="cardSummary">
+                        <p class="position-absolute top-0 end-0 m-3 click-here">
+                            <i class="bi bi-hand-index-fill"></i>
+                        </p>
+                        <div>
+                            <i class="bi bi-people fs-2 mb-2"></i>
+                            <h5>Total Petani</h5>
+                            <p class="fs-3 fw-bold"><span>42</span></p>
+                            <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                        </div>
+
+
                     </div>
-
-
-                </div>
                 </a>
 
             </div>
 
             <!-- Production Overview -->
             <div class="col-12 col-sm-6 col-md-3">
-                <a href="{{route('padi.index')}}" style="text-decoration: none">
-                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <p class="position-absolute top-0 end-0 m-3 click-here">
-                        <i class="bi bi-hand-index-fill"></i>
-                    </p>
+                <a href="{{ route('padi.index') }}" style="text-decoration: none">
+                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
+                        <p class="position-absolute top-0 end-0 m-3 click-here">
+                            <i class="bi bi-hand-index-fill"></i>
+                        </p>
 
-                    <div>
-                        <i class="bi bi-box-seam fs-2 mb-2"></i>
-                        <h5>Produksi Padi</h5>
-                        <p class="fs-3 fw-bold"><span>1,850</span> kg</p>
-                        <span class="fs-6">⬆ 8% dari bulan lalu</span>
+                        <div>
+                            <i class="bi bi-box-seam fs-2 mb-2"></i>
+                            <h5>Padi Tersedia</h5>
+                            <p class="fs-3 fw-bold"><span>1,850</span> kg</p>
+                            <span class="fs-6">⬆ 8% dari bulan lalu</span>
+                        </div>
                     </div>
-                </div>
                 </a>
 
             </div>
 
             <!-- Inventory Alerts -->
             <div class="col-12 col-sm-6 col-md-3">
-                 <a href="{{route('produk.index')}}" style="text-decoration:none">
-                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <p class="position-absolute top-0 end-0 m-3 click-here">
-                        <i class="bi bi-hand-index-fill"></i>
-                    </p>
+                <a href="{{ route('produk.index') }}" style="text-decoration:none">
+                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
+                        <p class="position-absolute top-0 end-0 m-3 click-here">
+                            <i class="bi bi-hand-index-fill"></i>
+                        </p>
 
-                    <div>
-                        <i class="bi bi-exclamation-triangle fs-2 mb-2"></i>
-                        <h5>Stok Rendah</h5>
-                        <p class="fs-3 fw-bold"><span>3</span> Produk</p>
-                        <span class="fs-6">Perlu restock</span>
+                        <div>
+                            <i class="bi bi-exclamation-triangle fs-2 mb-2"></i>
+                            <h5>Stok Rendah</h5>
+                            <p class="fs-3 fw-bold"><span>3</span> Produk</p>
+                            <span class="fs-6">Perlu restock</span>
+                        </div>
+
                     </div>
-
-                </div>
-                 </a>
+                </a>
             </div>
 
             <!-- Financial Summary -->
             <div class="col-12 col-sm-6 col-md-3">
                 <a href="" style="text-decoration: none">
-                <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
-                    <p class="position-absolute top-0 end-0 m-3 click-here">
-                        <i class="bi bi-hand-index-fill"></i>
-                    </p>
-                    <div>
-                        <i class="bi bi-cash-coin fs-2 mb-2"></i>
-                        <h5>Pendapatan</h5>
-                        <p class="fs-3 fw-bold">Rp <span>24,5jt</span></p>
-                        <span class="fs-6">⬆ 15% dari bulan lalu</span>
+                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
+                        <p class="position-absolute top-0 end-0 m-3 click-here">
+                            <i class="bi bi-hand-index-fill"></i>
+                        </p>
+                        <div>
+                            <i class="bi bi-cash-coin fs-2 mb-2"></i>
+                            <h5>Pendapatan</h5>
+                            <p class="fs-3 fw-bold">Rp <span>24,5jt</span></p>
+                            <span class="fs-6">⬆ 15% dari bulan lalu</span>
+                        </div>
                     </div>
-                </div>
             </div>
             </a>
         </div>
@@ -228,6 +229,12 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
     <script>
+        const petani = @json($petani);
+        const penjualan = @json($penjualan);
+        const produksiBeras = @json($produksiBeras);
+        const pendapatan = @json($pendapatan);
+        // console.log(petani['Gender']);
+
         document.addEventListener('DOMContentLoaded', function() {
             // Production Trend Chart
             var productionOptions = {
@@ -284,6 +291,11 @@
                 productionOptions);
             productionChart.render();
 
+            const [gender0,total0] = petani['Gender'][0];
+            // const [gender1,total1] = petani['Gender'][1];
+
+            console.log('gender0')
+
             // Gender Distribution Chart
             var genderOptions = {
                 series: [28, 14],
@@ -291,7 +303,7 @@
                     type: 'donut',
                     height: 300
                 },
-                labels: ['Laki-laki', 'Perempuan'],
+                labels: [13,12],
                 colors: ['#0d6efd', '#ff6b6b'],
                 legend: {
                     position: 'bottom'
@@ -345,10 +357,7 @@
 
 
         let increment = 0;
-        const petani = @json($petani);
-        const penjualan = @json($penjualan);
-        const produksiBeras = @json($produksiBeras);
-        const pendapatan = @json($pendapatan);
+
 
         console.log(pendapatan['CurrentMonth']);
 

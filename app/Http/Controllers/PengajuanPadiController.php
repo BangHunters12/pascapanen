@@ -19,19 +19,20 @@ class PengajuanPadiController extends Controller
 
     // Proses simpan pengajuan
   public function store(Request $request)
-{
+    {
 
 
     $request->validate([
-        // 'user_id' => 'required|exists:users,id',
+        'id_petani' => 'required|exists:petani',
         'id_padi' => 'required|exists:padi,id_padi',
         'perlu_mobil' => 'required|boolean',
         'jumlah_karung' => 'required|integer|min:1',
         'tanggal_pengajuan' => 'required|date',
         'keterangan' => 'nullable|string',
     ]);
+
     PengajuanPadi::create([
-        'id_petani' => auth()->user()->id_petani,
+        'id_petani' => $request->id_petani,
         'id_padi' => $request->id_padi,
         'perlu_mobil' => $request->perlu_mobil,
         'jumlah_karung' => $request->jumlah_karung,
@@ -117,7 +118,7 @@ public function destroy($id)
 
 public function cetakSemuaHTML()
 {
-    
+
     $pengajuanList = PengajuanPadi::with('petani', 'padi')->get();
     return view('admin.pengajuanpadi.cetak', compact('pengajuanList'));
 }

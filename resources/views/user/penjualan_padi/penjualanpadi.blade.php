@@ -2,11 +2,29 @@
 @section('content')
     <section id="penjualan" class="py-5 bg-white">
         <div class="container">
+
             <div class="container section-title" data-aos="fade-up" style="margin-top: 50px;">
                 <h2 class="fw-bold">Penjualan Padi</h2>
                 <p class="lead">Catat penjualan padi ke pembeli dengan sistem yang rapi.</p>
             </div>
 
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <strong>Terjadi kesalahan!</strong>
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <!-- Gambar -->
             <div class="text-center mb-3 mt-2">
                 <img src="{{ asset('assets/images/logos/jualpadi.jpg') }}" alt="Penjualan Padi" class="img-fluid rounded"
@@ -68,7 +86,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Nama Petani</label>
                                 <input type="text" class="form-control" value="{{ Auth::user()->nama_lengkap }}" readonly>
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="id_petani" value="{{ Auth::user()->id_petani }}">
                             </div>
                             <!-- Pilih Padi -->
                             <div class="mb-3">
@@ -116,7 +134,7 @@
                                 <label class="form-label">Keterangan (Opsional)</label>
                                 <textarea name="keterangan" class="form-control">{{ old('keterangan') }}</textarea>
                             </div>
-                            
+
 
                             <!-- Tombol Submit -->
                             <div class="text-end">

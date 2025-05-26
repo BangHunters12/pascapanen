@@ -12,7 +12,7 @@ class PetaniMiddleware
 {
     public function handle($request, Closure $next): Response
     {
-        if (Auth::user()->role == "petani") {
+        if (Auth::user()->role == "petani" || Auth::user()->role =="admin") {
             return $next($request);
         }
 

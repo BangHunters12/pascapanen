@@ -37,9 +37,9 @@
                         <td>{{ $pengajuan->perlu_mobil ? 'Ya' : 'Tidak' }}</td>
                         <td>{{ $pengajuan->tanggal_pengajuan }}</td>
                         <td>
-                            <span class="badge bg-{{ 
-                                $pengajuan->status == 'menunggu persetujuan' ? 'secondary' : 
-                                ($pengajuan->status == 'disetujui' ? 'success' : 'danger') 
+                            <span class="badge bg-{{
+                                $pengajuan->status == 'menunggu persetujuan' ? 'secondary' :
+                                ($pengajuan->status == 'disetujui' ? 'success' : 'danger')
                             }}">
                                 {{ ucfirst($pengajuan->status) }}
                             </span>
@@ -69,9 +69,8 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="/cetak" target="_blank" class="btn btn-success mb-2">Cetak HTML</a>
-<a href="/cetak" class="btn btn-danger mb-2">Cetak PDF</a>
-
+        <a href="{{route('pengajuan_padi.cetak_html')}}" target="_blank" class="btn btn-success mb-2">Cetak HTML</a>
+        <a href="{{route('pengajuan_padi.cetak_pdf')}}" class="btn btn-danger mb-2">Cetak PDF</a>
     </div>
 </div>
 

@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class Petani extends Authenticatable
 {
@@ -33,7 +34,7 @@ class Petani extends Authenticatable
     protected $hidden = [
         'password',
     ];
-    
+
     function scopeCurrentMonth($query)
     {
         return $query->whereYear('created_at', now()->year)
@@ -46,5 +47,9 @@ class Petani extends Authenticatable
         return $query->whereYear('created_at', now()->subMonth()->year)
             ->whereMonth('created_at', now()->subMonth()->month)
             ->count();
+    }
+
+    function scopeGender($query){
+        return $query->select('gender',DB::raw('count(*) as total'))->groupBy('gender');
     }
 }
