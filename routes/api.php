@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\LogoController;
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +45,6 @@ Route::prefix('produk')->group(function () {
 });
 // Notification
 Route::get('send-notification',[AdminController::class,'sendNotification']);
-
 
 Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
 

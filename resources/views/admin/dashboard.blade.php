@@ -22,7 +22,7 @@
 
 @section('content')
     <div class="container-fluid mt-0 p-3">
-        <h2 class="fw-bold"><i class="bi bi-speedometer2"></i> Dashboard</h2>
+        <h2 class="fw-bold"><i class="bi bi-window-stack"></i> Dashboard</h2>
         <p class="text-muted">Ringkasan aktivitas pasca panen padi</p>
 
         <!-- Top Summary Cards -->
@@ -39,7 +39,7 @@
                             <i class="bi bi-people fs-2 mb-2"></i>
                             <h5>Total Petani</h5>
                             <p class="fs-3 fw-bold"><span>42</span></p>
-                            <span class="fs-6">⬆ 12% dari bulan lalu</span>
+                            {{-- <span class="fs-6">⬆ 12% dari bulan lalu</span> --}}
                         </div>
 
 
@@ -60,7 +60,7 @@
                             <i class="bi bi-box-seam fs-2 mb-2"></i>
                             <h5>Padi Tersedia</h5>
                             <p class="fs-3 fw-bold"><span>1,850</span> kg</p>
-                            <span class="fs-6">⬆ 8% dari bulan lalu</span>
+                            {{-- <span class="fs-6"></span> --}}
                         </div>
                     </div>
                 </a>
@@ -79,7 +79,7 @@
                             <i class="bi bi-exclamation-triangle fs-2 mb-2"></i>
                             <h5>Stok Rendah</h5>
                             <p class="fs-3 fw-bold"><span>3</span> Produk</p>
-                            <span class="fs-6">Perlu restock</span>
+                            {{-- <span class="fs-6">Perlu restock</span> --}}
                         </div>
 
                     </div>
@@ -88,8 +88,14 @@
 
             <!-- Financial Summary -->
             <div class="col-12 col-sm-6 col-md-3">
+
                 <a href="" style="text-decoration: none">
-                    <div class="card shadow-sm p-3 text-center border-0 bg-success text-white" id="cardSummary">
+                    <div class="position-relative card shadow-sm p-3 text-center border-0 bg-success text-white"
+                        id="cardSummary">
+                        <div class="card position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-3"
+                            style="background-color: rgba(0,0,0,0.5);">
+                            <h1 class="text-white fw-bold display-4">WIP</h1>
+                        </div>
                         <p class="position-absolute top-0 end-0 m-3 click-here">
                             <i class="bi bi-hand-index-fill"></i>
                         </p>
@@ -97,7 +103,7 @@
                             <i class="bi bi-cash-coin fs-2 mb-2"></i>
                             <h5>Pendapatan</h5>
                             <p class="fs-3 fw-bold">Rp <span>24,5jt</span></p>
-                            <span class="fs-6">⬆ 15% dari bulan lalu</span>
+                            {{-- <span class="fs-6">⬆ 15% dari bulan lalu</span> --}}
                         </div>
                     </div>
             </div>
@@ -105,17 +111,25 @@
         </div>
 
         <!-- Main Dashboard Sections -->
-        <div class="row mt-4 g-3">
+        <div class="row  g-3">
             <!-- Left Column -->
             <div class="col-12 col-lg-8">
                 <!-- Production Trend -->
                 <div class="card shadow-sm p-3 mb-3">
                     <h5 class="fw-bold"><i class="bi bi-graph-up"></i> Tren Produksi 6 Bulan Terakhir</h5>
+                    {{-- <div
+                        class="card position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-3" style="background-color: rgba(0,0,0,0.5);">
+                        <h1 class="text-white fw-bold display-4">WIP</h1>
+                    </div> --}}
                     <div id="productionTrendChart"></div>
                 </div>
 
                 <!-- Recent Transactions -->
-                <div class="card shadow-sm p-3">
+                <div class="card shadow-sm p-3 position-relative">
+                    <div class="card position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-3"
+                        style="background-color: rgba(0,0,0,0.5);">
+                        <h1 class="text-white fw-bold display-4">WIP</h1>
+                    </div>
                     <h5 class="fw-bold"><i class="bi bi-clock-history"></i> Transaksi Terakhir</h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -129,6 +143,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
                                     <td>15 Jun 2023</td>
                                     <td>Budi Santoso</td>
@@ -182,18 +197,14 @@
                 <div class="card shadow-sm p-3 mb-3">
                     <h5 class="fw-bold"><i class="bi bi-exclamation-triangle text-warning"></i> Stok Rendah</h5>
                     <div class="list-group">
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            Pupuk Organik
-                            <span class="badge bg-danger rounded-pill">2 kg</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            Pestisida
-                            <span class="badge bg-warning rounded-pill">3 botol</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            Karung Beras
-                            <span class="badge bg-warning rounded-pill">10 pcs</span>
-                        </div>
+
+                        @foreach ($produk as $item)
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ $item->nama_produk }}
+                                <span class="badge bg-danger rounded-pill">{{ $item->stok }} {{ $item->satuan }}</span>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
 
@@ -201,22 +212,52 @@
                 <div class="card shadow-sm p-3">
                     <h5 class="fw-bold"><i class="bi bi-hourglass-split text-primary"></i> Persetujuan Menunggu</h5>
                     <div class="list-group">
-                        <div class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Pengajuan Sewa Traktor</h6>
-                                <small>2 hari lalu</small>
+                        @foreach ($pengajuan['sewa'] as $sewa)
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between align-items-start">
+
+                                    <div class="mb-1 ">
+                                        <h6>{{ $sewa->nama_sewa }} </h6>
+                                        <h6>
+                                            @switch($sewa->status)
+                                                @case('menunggu persetujuan')
+                                                    <span class="text-warning">{{ $sewa->status }}</span>
+                                                @break
+
+                                                @case('disetujui')
+                                                    <span class="text-success">{{ $sewa->status }}</span>
+                                                @break
+
+                                                @case('ditolak')
+                                                    <span class="text-danger">{{ $sewa->status }}</span>
+                                                @break
+
+                                                @default
+                                                    $sewa->status
+                                            @endswitch
+                                        </h6>
+                                    </div>
+                                    <small class="text-end">
+                                        @php
+                                            \Carbon\Carbon::setLocale('id');
+                                            $createdAt = \Carbon\Carbon::parse($sewa->created_at);
+                                        @endphp
+
+                                        @if ($createdAt->isToday())
+                                            Hari ini
+                                        @elseif ($createdAt->isYesterday())
+                                            Kemarin
+                                        @else
+                                            {{ $createdAt->diffForHumans() }}
+                                        @endif
+                                    </small>
+                                </div>
+                                <p class="mb-1">Oleh: {{ $sewa->nama_lengkap_petani }}</p>
+                                <small class="text-muted">{{ $sewa->lama_sewa_hari }} hari, Rp
+                                    {{ number_format($sewa->total_harga, '0', ',', '.') }}</small>
                             </div>
-                            <p class="mb-1">Oleh: Ahmad Fauzi</p>
-                            <small class="text-muted">3 hari, Rp 450.000</small>
-                        </div>
-                        <div class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Pengajuan Pupuk</h6>
-                                <small>1 hari lalu</small>
-                            </div>
-                            <p class="mb-1">Oleh: Sri Lestari</p>
-                            <small class="text-muted">10 kg</small>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -231,25 +272,90 @@
     <script>
         const petani = @json($petani);
         const penjualan = @json($penjualan);
-        const produksiBeras = @json($produksiBeras);
+        const padi = @json($padi);
+        const beras = @json($beras);
         const pendapatan = @json($pendapatan);
-        // console.log(petani['Gender']);
+        const pengajuan = @json($pengajuan);
+        const produk = @json($produk);
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // Production Trend Chart
+
+            const dbData = padi.datas;
+            const dbDataBeras = beras.datas;
+
+            const monthMap = {
+                'January': 'Jan',
+                'February': 'Feb',
+                'March': 'Mar',
+                'April': 'Apr',
+                'May': 'May',
+                'June': 'Jun',
+                'July': 'Jul',
+                'August': 'Aug',
+                'September': 'Sep',
+                'October': 'Oct',
+                'November': 'Nov',
+                'December': 'Dec'
+            };
+
+            // Combine and sort all unique months from both datasets
+            const allMonths = [...dbData, ...dbDataBeras]
+                .sort((a, b) => {
+                    if (a.year !== b.year) return a.year - b.year;
+                    return a.month_number - b.month_number;
+                })
+                .slice(-6); // Take last 6 months
+
+            // Remove duplicates and keep only the last 6 unique months
+            const uniqueMonths = [];
+            const monthSet = new Set();
+
+            [...allMonths].reverse().forEach(item => {
+                const monthKey = `${item.year}-${item.month_number}`;
+                if (!monthSet.has(monthKey)) {
+                    monthSet.add(monthKey);
+                    uniqueMonths.unshift(item); // Keep original order
+                }
+            });
+
+            // Prepare categories (month names)
+            const categories = uniqueMonths.map(item => monthMap[item.month_name]);
+
+            // Map data for both series
+            const padiData = uniqueMonths.map(month => {
+                const found = dbData.find(item =>
+                    item.year === month.year &&
+                    item.month_number === month.month_number
+                );
+                return found ? parseInt(found.total_stok) : 0;
+            });
+
+            const berasData = uniqueMonths.map(month => {
+                const found = dbDataBeras.find(item =>
+                    item.year === month.year &&
+                    item.month_number === month.month_number
+                );
+                return found ? parseInt(found.total_stok) : 0;
+            });
+
+
+
             var productionOptions = {
                 series: [{
                     name: 'Padi',
-                    data: [1200, 1500, 1800, 1650, 2100, 1850]
+                    data: padiData
                 }, {
                     name: 'Beras',
-                    data: [950, 1200, 1500, 1300, 1800, 1550]
+                    data: berasData
                 }],
                 chart: {
                     type: 'line',
                     height: 300,
                     toolbar: {
-                        show: true
+                        show: false
                     }
                 },
                 colors: ['#28a745', '#ffc107'],
@@ -258,7 +364,7 @@
                     width: 3
                 },
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                    categories: categories,
                     labels: {
                         style: {
                             colors: '#6c757d'
@@ -291,19 +397,29 @@
                 productionOptions);
             productionChart.render();
 
-            const [gender0,total0] = petani['Gender'][0];
-            // const [gender1,total1] = petani['Gender'][1];
-
-            console.log('gender0')
+            const {
+                gender: gender0,
+                total: total0
+            } = petani['Gender'][0] || {
+                gender: '-',
+                total: 0
+            };
+            const {
+                gender: gender1,
+                total: total1
+            } = petani['Gender'][1] || {
+                gender: '-',
+                total: 0
+            };
 
             // Gender Distribution Chart
             var genderOptions = {
-                series: [28, 14],
+                series: [total0, total1],
                 chart: {
                     type: 'donut',
                     height: 300
                 },
-                labels: [13,12],
+                labels: [gender0, gender1],
                 colors: ['#0d6efd', '#ff6b6b'],
                 legend: {
                     position: 'bottom'
@@ -316,7 +432,7 @@
                                 total: {
                                     show: true,
                                     label: 'Total Petani',
-                                    formatter: () => '42'
+                                    formatter: () => total0 + total1
                                 }
                             }
                         }
@@ -359,9 +475,8 @@
         let increment = 0;
 
 
-        console.log(pendapatan['CurrentMonth']);
 
-        const cardNumberValue = [petani.Total, produksiBeras.Total, 0, pendapatan.Total]
+        const cardNumberValue = [petani.Total, padi.Total, produk.length, pendapatan.Total]
 
         animate('#cardSummary', {
             y: [{
@@ -396,8 +511,6 @@
                         })
                     }
                 });
-
-
             });
 
             element.addEventListener('mouseleave', () => {

@@ -35,11 +35,11 @@ class ProduksiBerasController extends Controller
             'jumlah_padi' => 'required|integer',
             'jumlah_beras' => 'required|integer',
             'keterangan' => 'nullable|string'
-        ]); 
+        ]);
 
         ProduksiBeras::create($request->all());
 
-        return redirect()->route('admin.produksi_beras.index')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function edit($id)

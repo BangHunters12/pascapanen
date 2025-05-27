@@ -58,6 +58,7 @@ class PadiController extends Controller
         'bentuk' => 'required|string|max:255',
         'tekstur' => 'required|string|max:255',
         'harga' => 'required|numeric',
+        'stok'=>'required|numeric',
         'gambar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
     ]);
 
@@ -82,6 +83,7 @@ class PadiController extends Controller
         'bentuk' => $request->bentuk,
         'tekstur' => $request->tekstur,
         'harga' => $request->harga,
+        'stok'=>$request->stok,
         'gambar' => $padi->gambar, // gunakan yang baru kalau ada, atau tetap yang lama
     ]);
 

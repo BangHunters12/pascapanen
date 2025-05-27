@@ -58,11 +58,11 @@
                             class="ti ti-clipboard-text"></i> Pengajuan Sewa</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pengajuanpadi.index') }}"><i
                             class="ti ti-clipboard-text"></i> Pengajuan Padi</a></li>
-                            <li class="sidebar-item">
-    <a class="sidebar-link" href="{{ route('laporan.transaksi') }}">
-        <i class="ti ti-tool"></i> Detail Transaksi
-    </a>
-</li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('laporan.transaksi') }}">
+                        <i class="ti ti-tool"></i> Detail Transaksi
+                    </a>
+                </li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ route('berita.index') }}"><i
                             class="ti ti-news"></i> Berita</a></li>
 

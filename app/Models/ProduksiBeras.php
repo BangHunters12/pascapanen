@@ -47,4 +47,19 @@ class ProduksiBeras extends Model
             ->whereMonth('created_at', now()->subMonth()->month)
             ->count();
     }
+
+    public function scopeLastSixMonths($query)
+    {
+        return $query->where('created_at', '>=', now()->subMonths(6))
+            ->selectRaw('
+            MONTHNAME(created_at) as month_name,
+            YEAR(created_at) as year,
+            MONTH(created_at) as month_number,
+            COUNT(*) as total_items,
+            SUM(jumlah_beras) as total_stok
+        ')
+            ->groupBy('month_name', 'year', 'month_number')
+            ->orderBy('year', 'desc')
+            ->orderBy('month_number', 'desc');
+    }
 }

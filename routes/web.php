@@ -51,11 +51,13 @@ Route::prefix("/admin")->middleware(['auth', 'AdminMiddleware'])->group(function
     Route::resource('berita', BeritaController::class)->names('berita');
     Route::resource('produk', ProdukController::class)->names('produk');
     Route::resource('pengajuanpadi', PengajuanPadiController::class)->only(['update'])->names('pengajuanpadi');
+    Route::resource('laporan',LaporanController::class)->names('laporan');
     Route::delete('pengajuanpadi/{id}', [PengajuanPadiController::class, 'destroy'])->name('pengajuanpadi.destroy');
     Route::resource('petani', PetaniController::class)->names('petani');
     Route::get('/pengajuan', [PengajuanPadiController::class, 'index'])->name('pengajuanpadi.index');
     Route::get('/pengajuanpadi/cetak/html', [PengajuanPadiController::class, 'cetakSemuaHTML'])->name('pengajuan_padi.cetak_html');
     Route::get('/pengajuanpadi/cetak/pdf', [PengajuanPadiController::class, 'cetakSemuaPDF'])->name('pengajuan_padi.cetak_pdf');
+
 
 
 
