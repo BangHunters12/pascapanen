@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\LogoController;
+use App\Http\Controllers\Api\TransaksiController;
+
 
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
@@ -32,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/profile/update', [ProfileController::class, 'update']);
     Route::post('/profile/upload-image', [LogoController::class, 'uploadImage']);
+    // Route::post('/transaksi', [TransaksiController::class, 'store']);
+    // Route::get('/transaksi', [TransaksiController::class, 'index']);
 });
 
 
@@ -44,15 +48,19 @@ Route::prefix('produk')->group(function () {
     Route::delete('/{id}', [ProdukController::class, 'destroy']);
 });
 // Notification
-Route::get('send-notification',[AdminController::class,'sendNotification']);
+Route::get('send-notification', [AdminController::class, 'sendNotification']);
 
-Route::middleware('auth:sanctum')->get('/profil', [ProfileController::class, 'profil']);
+Route::get('/histori', [TransaksiController::class, 'semuaHistori']);
+Route::get('/histori/{nama_pembeli}', [TransaksiController::class, 'historiByNamaPembeli']);
+Route::post('/transaksi', [TransaksiController::class, 'store']);
+Route::get('/transaksi', [TransaksiController::class, 'index']);
+// Route::middleware('auth:sanctum')->get('/profil', action: [ProfileController::class, 'profil']);
 
- // Produk
-    Route::prefix('produk')->group(function () {
-        Route::get('/', [ProdukController::class, 'index']);
-        Route::get('/{id}', [ProdukController::class, 'show']);
-        Route::post('/', [ProdukController::class, 'store']);
-        Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
-        Route::delete('/{id}', [ProdukController::class, 'destroy']);
-    });
+// Produk
+Route::prefix('produk')->group(function () {
+    Route::get('/', [ProdukController::class, 'index']);
+    Route::get('/{id}', [ProdukController::class, 'show']);
+    Route::post('/', [ProdukController::class, 'store']);
+    Route::post('/{id}', [ProdukController::class, 'update']); // Gunakan POST jika sulit pakai PUT di mobile
+    Route::delete('/{id}', [ProdukController::class, 'destroy']);
+});

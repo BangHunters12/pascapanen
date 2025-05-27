@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
     public function editProfil()
     {
-        return view('profile.editProfil');
+        return view('profile.edit-profil');
     }
 
     public function updateProfil(Request $request)
@@ -45,9 +45,9 @@ class ProfileController extends Controller
         $user->update($data);
 
         if ($user->role === 'admin') {
-        return redirect('/admin/dashboard')->with('success', 'Profil berhasil diperbarui.');
-    } else {
-        return redirect('/')->with('success', 'Profil berhasil diperbarui.');
-    }
+            return redirect('/admin/dashboard')->with('success', 'Profil berhasil diperbarui.');
+        } else {
+            return redirect('/')->with('success', 'Profil berhasil diperbarui.');
+        }
     }
 }

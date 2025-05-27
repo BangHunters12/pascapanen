@@ -15,20 +15,20 @@ class SewaSeeder extends Seeder
     {
         DB::table('jenis_sewa')->insert([
             [
-                'nama_sewa' => 'Sewa Harian',
-                'harga_sewa' => 100000,
+                'nama_sewa' => 'Alat Bajak',
+                'harga_sewa' => 300000,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'nama_sewa' => 'Sewa Mingguan',
-                'harga_sewa' => 600000,
+                'nama_sewa' => 'Alat Panen',
+                'harga_sewa' => 200000,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'nama_sewa' => 'Sewa Bulanan',
-                'harga_sewa' => 2000000,
+                'nama_sewa' => 'Tenaga Tanam',
+                'harga_sewa' => 200000,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
