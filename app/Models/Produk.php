@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Produk extends Model
 {
     use HasFactory;
@@ -18,4 +19,10 @@ class Produk extends Model
         'satuan',
         'gambar' // tambahkan ini agar field gambar bisa diisi saat create/update
     ];
+
+    public function TransaksiProduk()
+{
+    return $this->hasMany(TransaksiProduk::class, 'id_produk', 'id_produk');
+}
+
 }
