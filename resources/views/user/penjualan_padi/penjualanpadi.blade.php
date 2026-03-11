@@ -79,17 +79,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('pengajuanpadi.store') }}" method="POST">
+                        <form action="{{ route('pengajuanpadi.store') }}" method="post">
                             @csrf
 
                             <!-- Nama Petani -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group">
                                 <label class="form-label">Nama Petani</label>
                                 <input type="text" class="form-control" value="{{ Auth::user()->nama_lengkap }}" readonly>
                                 <input type="hidden" name="id_petani" value="{{ Auth::user()->id_petani }}">
                             </div>
                             <!-- Pilih Padi -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group" >
                                 <label for="id_padi" class="form-label">Pilih Padi:</label>
                                 <select name="id_padi" class="form-select" required>
                                     <option value="">-- Pilih Padi --</option>
@@ -106,7 +106,7 @@
                             </div>
 
                             <!-- Perlu Mobil -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group">
                                 <label class="form-label">Perlu Mobil?</label>
                                 <select name="perlu_mobil" class="form-select" required>
                                     <option value="">-- Pilih --</option>
@@ -116,27 +116,28 @@
                             </div>
 
                             <!-- Jumlah Karung -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group">
                                 <label class="form-label">Jumlah Karung</label>
                                 <input type="number" name="jumlah_karung" class="form-control"
                                     value="{{ old('jumlah_karung') }}" min="1" step="1" required>
                             </div>
 
                             <!-- Tanggal Pengajuan -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group">
                                 <label class="form-label">Tanggal Pengajuan</label>
                                 <input type="date" name="tanggal_pengajuan" class="form-control"
                                     value="{{ old('tanggal_pengajuan') }}" required>
                             </div>
 
                             <!-- Keterangan -->
-                            <div class="mb-3">
+                            <div class="mb-3 form-group">
                                 <label class="form-label">Keterangan (Opsional)</label>
                                 <textarea name="keterangan" class="form-control">{{ old('keterangan') }}</textarea>
                             </div>
 
 
                             <!-- Tombol Submit -->
+
                             <div class="text-end">
                                 <button type="submit" class="btn btn-success">Ajukan</button>
                             </div>

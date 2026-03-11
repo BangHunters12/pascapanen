@@ -19,11 +19,11 @@ class PengajuanPadiController extends Controller
 
     // Proses simpan pengajuan
   public function store(Request $request)
-    {
+{
 
 
     $request->validate([
-        'id_petani' => 'required|exists:petani',
+        // 'user_id' => 'required|exists:users,id',
         'id_padi' => 'required|exists:padi,id_padi',
         'perlu_mobil' => 'required|boolean',
         'jumlah_karung' => 'required|integer|min:1',
@@ -32,16 +32,15 @@ class PengajuanPadiController extends Controller
     ]);
 
     PengajuanPadi::create([
-        'id_petani' => $request->id_petani,
+        'id_petani' => auth()->user()->id_petani,
         'id_padi' => $request->id_padi,
         'perlu_mobil' => $request->perlu_mobil,
         'jumlah_karung' => $request->jumlah_karung,
         'tanggal_pengajuan' => $request->tanggal_pengajuan,
         'keterangan' => $request->keterangan,
-        // Kolom berikut akan diisi oleh admin nanti
         'jumlah_kg' => null,
         'total_harga' => null,
-        'status' => 'menunggu persetujuan', // default
+        'status' => 'menunggu persetujuan',
     ]);
 
     return redirect()->back()->with('success', 'Pengajuan berhasil dikirim.');
@@ -126,8 +125,8 @@ public function cetakSemuaHTML()
 public function cetakSemuaPDF()
 {
     $pengajuanList = PengajuanPadi::with('petani', 'padi')->get();
-    $pdf = Pdf::loadView('admin.pengajuanpadi.cetak', compact('pengajuanList'))->setPaper('a4', 'landscape');
-    return $pdf->download('Data_Pengajuan_Padi.pdf');
+    // $pdf = Pdf::loadView('admin.pengajuanpadi.cetak', compact('pengajuanList'))->setPaper('a4', 'landscape');
+    // return $pdf->download('Data_Pengajuan_Padi.pdf');
 }
 
 }

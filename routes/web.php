@@ -16,17 +16,11 @@ use App\Http\Controllers\ProduksiBerasController;
 use App\Http\Controllers\LaporanTransaksiController;
 use Illuminate\Support\Facades\Route;
 
-
-
-
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/berita/{id}', [HomeController::class, 'detail'])->name('berita.detail');
 Route::get('/penjualan-padi', [PengajuanPadiController::class, 'penjualanView'])->name('user.penjualan_padi.penjualanpadi');
 Route::get('/layanan/{jenis}', [PengajuanSewaController::class, 'formView'])->name('user.layanan.form');
 Route::get('/produk/{kategori}', [HomeController::class, 'produkByKategori'])->name('user.produk.kategori');
-Route::get('/layanan/alat-bajak', function () {
-    return view('layanan.alat_bajak');
-})->name('layanan.alat_bajak');
 
 
 
