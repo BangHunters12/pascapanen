@@ -28,22 +28,20 @@ node {
     }
 
     // Deploy env prod
-    stage("Deploy") {
-        docker.image('alpine').inside('-u root') {
-            sh 'apk add --no-cache rsync openssh'
+   stage("Deploy"){
+    docker.image('alpine').inside('-u root') {
+        sh '''
+        apk add --no-cache rsync openssh
 
-            sshagent(credentials: ['ssh-prod']) {
-                sh 'mkdir -p ~/.ssh'
-                sh 'ssh-keyscan -H "$PROD_HOST" >> ~/.ssh/known_hosts'
-
-                sh '''
-                rsync -rav --delete ./laravel/ \
-                ubuntu@$PROD_HOST:/home/ubuntu/prod.kelasdevops.xyz/ \
-                --exclude=.env \
-                --exclude=storage \
-                --exclude=.git
-                '''
-            }
+        mkdir -p /root/.ssh
+        ssh-keyscan -H 10.121.225.62 >> /root/.ssh/known_hosts
+        '''
+        
+        sshagent(['ssh-prod']) {
+            sh '''
+            rsync -avz --delete ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
+            '''
         }
     }
+}
 }
