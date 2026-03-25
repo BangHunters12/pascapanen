@@ -3,7 +3,7 @@ node {
 
     // Build stage
     stage("Build"){
-    docker.image('php:8.2-cli').inside('-u root') {
+    docker.image('php:8.2-cli').inside('--entrypoint="" -u root') {
         sh '''
         apt-get update
         apt-get install -y unzip git curl
