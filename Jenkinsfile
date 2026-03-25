@@ -38,10 +38,10 @@ node {
         '''
         
         sshagent(['ssh-prod']) {
-            sh '''
-            rsync -avz --delete ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
-            '''
-        }
+    sh '''
+    rsync -avz -e "ssh -p 2222 -o StrictHostKeyChecking=no" ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
+    '''
+}
     }
 }
 }
