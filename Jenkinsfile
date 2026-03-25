@@ -36,7 +36,7 @@ node {
 
         sshagent(['ssh-prod']) {
             sh '''
-            rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@172.25.99.119:/home/ubuntu/laravel-app
             '''
         }
     }
