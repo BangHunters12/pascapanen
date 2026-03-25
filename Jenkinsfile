@@ -32,16 +32,13 @@ node {
     docker.image('alpine').inside('-u root') {
         sh '''
         apk add --no-cache rsync openssh
-
-        mkdir -p /root/.ssh
-        ssh-keyscan -H 10.121.225.62 >> /root/.ssh/known_hosts
         '''
-        
+
         sshagent(['ssh-prod']) {
-    sh '''
-    rsync -avz -e "ssh -p 2222 -o StrictHostKeyChecking=no" ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
-    '''
-}
+            sh '''
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@10.121.225.62:/home/ubuntu/laravel-app
+            '''
+        }
     }
 }
 }
