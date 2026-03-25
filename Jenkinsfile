@@ -2,11 +2,10 @@ node {
     checkout scm
 
     // Build stage
-    stage("Build") {
-        docker.image('shippingdocker/php-composer:7.4').inside('-u root') {
-            sh 'rm -f composer.lock'
-            sh 'composer install'
-        }
+    stage("Build"){
+    docker.image('composer:2').inside('-u root') {
+        sh 'composer install'
+    }
     }
 
     // Testing stage
