@@ -3,10 +3,22 @@ node {
 
     // Build stage
     stage("Build"){
-    docker.image('composer:2').inside('-u root') {
-        sh 'composer install'
+    docker.image('php:8.2-cli').inside('-u root') {
+        sh '''
+        apt-get update
+        apt-get install -y unzip git curl
+
+        curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
+
+        docker-php-ext-install bcmath
+
+        git config --global --add safe.directory /var/jenkins_home/workspace/laravel-dev
+
+        composer install
+        '''
     }
-    }
+}
 
     // Testing stage
     stage("Test") {
