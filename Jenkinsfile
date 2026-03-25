@@ -2,14 +2,16 @@ node {
     checkout scm
 
     // Build stage
-   stage("Build"){
+  stage("Build"){
     docker.image('php:8.2-cli').inside('--entrypoint="" -u root') {
         sh '''
         apt-get update
-        apt-get install -y unzip git curl php8.2-bcmath
+        apt-get install -y unzip git curl
 
         curl -sS https://getcomposer.org/installer | php
         mv composer.phar /usr/local/bin/composer
+
+        docker-php-ext-install bcmath
 
         git config --global --add safe.directory /var/jenkins_home/workspace/laravel-dev
 
